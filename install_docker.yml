@@ -56,3 +56,11 @@
       url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
       dest: /usr/local/bin/docker-compose
       mode: 'a+x'
+
+  - name: Copy docker-compose to server
+    copy:
+      src: docker-compose.yml
+      dest: ~/docker-compose.yml
+      owner: root
+      group: root
+      mode: 0644
