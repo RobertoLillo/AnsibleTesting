@@ -1,5 +1,4 @@
 ---
-# tasks file for keycloak
 - name: "Uninstall old Docker versions"
   apt:
     name:

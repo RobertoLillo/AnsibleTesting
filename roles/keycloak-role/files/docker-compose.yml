@@ -24,8 +24,8 @@ services:
       container_name: keycloak_app
       hostname: keycloak
       restart: unless-stopped
-      #volumes:
-      #  - /$PWD/sambaCert.pem:/opt/jboss/keycloak/sambaCert.pem
+      volumes:
+        - /home/robert/sambaCert.pem:/opt/jboss/keycloak/sambaCert.pem
       environment:
         DB_VENDOR: POSTGRES
         DB_ADDR: postgres
@@ -33,13 +33,11 @@ services:
         DB_USER: keycloak
         DB_SCHEMA: public
         DB_PASSWORD: keycloakPassword
-        KEYCLOAK_USER: administrator
-        KEYCLOAK_PASSWORD: P@assw0rd
-        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
-        #JDBC_PARAMS: "ssl=true"
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: Diinf1*
       ports:
         - 443:8443
-      #extra_hosts:
-      #  - "samba.diinf.lan:10.128.0.10"
+      extra_hosts:
+        - samba.diinf.lan:10.168.0.4
       depends_on:
         - postgres

@@ -4,10 +4,11 @@
 
 - name: "Install Docker-Compose"
   include_tasks: docker-compose-install.yml
-
-- name: "Copy docker-compose.yml"
-  include_tasks: copy-files.yml
   
-- name: "Deploy Keycloak Container"
+- name: "Deploy container"
+  include_tasks: deploy-keycloak-container.yml
+
+- name: "Copy SAMBA x509 certificate to Keycloak Server"
   shell:
-    cmd: "docker-compose up -d"
+    cmd: "openssl s_client -connect 10.168.0.4:636 </dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > sambaCert.pem"
+

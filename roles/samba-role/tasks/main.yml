@@ -5,9 +5,5 @@
 - name: "Install Docker-Compose"
   include_tasks: docker-compose-install.yml
 
-- name: "Copy docker-compose.yml"
-  include_tasks: copy-files.yml
-
-- name: "Deploy SAMBA AD Container"
-  shell:
-    cmd: "docker-compose up -d"
+- name: "Deploy container"
+  include_tasks: deploy-samba-container.yml

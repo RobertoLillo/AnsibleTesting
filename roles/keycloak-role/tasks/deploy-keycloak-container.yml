@@ -1,5 +1,4 @@
 ---
-# tasks file for keycloak
 - name: Copy docker-compose to server
   copy:
     src: docker-compose.yml
@@ -7,3 +6,7 @@
     owner: root
     group: root
     mode: 0644
+
+- name: "Deploy keycloak_app and postgres_db Container"
+  shell:
+    cmd: "docker-compose up -d"
