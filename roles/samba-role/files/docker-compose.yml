@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+
+# ----------- samba begin ----------- #
+  samba:
+    image: nowsci/samba-domain
+    container_name: samba-ad
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /data/docker/containers/samba/data/:/var/lib/samba
+      - /data/docker/containers/samba/config/samba:/etc/samba/external
+    environment:
+      - DOMAIN=OPERACIONES.TK
+      - DOMAINPASS=Operaciones1*
+      - DNSFORWARDER=8.8.8.8
+      - HOSTIP=10.128.0.10
+    ports:
+      - 10.128.0.10:53:53
+      - 10.128.0.10:53:53/udp
+      - 10.128.0.10:88:88
+      - 10.128.0.10:88:88/udp
+      - 10.128.0.10:135:135
+      - 10.128.0.10:137-138:137-138/udp
+      - 10.128.0.10:139:139
+      - 10.128.0.10:389:389
+      - 10.128.0.10:389:389/udp
+      - 10.128.0.10:445:445
+      - 10.128.0.10:464:464
+      - 10.128.0.10:464:464/udp
+      - 10.128.0.10:636:636
+      - 10.128.0.10:1024-1044:1024-1044
+      - 10.128.0.10:3268-3269:3268-3269
+    dns_search:
+      - operaciones.tk
+    dns:
+      - 10.128.0.10
+      - 10.128.0.1
+    extra_hosts:
+      - samba.operaciones.tk:10.128.0.10
+    hostname: samba
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    privileged: true
+    restart: always
+# ----------- samba end ----------- #

@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+
+    - name: "Update repository index"
+      apt:
+        update_cache: yes
+
+- hosts: samba
+  become: true
+  roles:
+    - samba-role
+
+- hosts: keycloak
+  become: true
+  roles:
+    - keycloak-role

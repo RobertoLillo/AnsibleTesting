@@ -1,10 +1,9 @@
 ---
-# tasks file for keycloak
-- name: "Install Docker"
+- name: "Install Docker" 
   include_tasks: docker-install.yml
 
 - name: "Install Docker-Compose"
   include_tasks: docker-compose-install.yml
 
-- name: "Copy docker-compose.yml to server"
+- name: "Copy docker-compose.yml"
   include_tasks: copy-files.yml
