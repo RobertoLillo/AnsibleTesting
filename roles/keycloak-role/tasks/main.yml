@@ -7,3 +7,7 @@
 
 - name: "Copy docker-compose.yml"
   include_tasks: copy-files.yml
+  
+- name: "Deploy Keycloak Container"
+  shell:
+    cmd: "docker-compose up -d"
