@@ -1,9 +1,2 @@
 ---
-- name: "Install Docker" 
-  include_tasks: docker-install.yml
-
-- name: "Install Docker-Compose"
-  include_tasks: docker-compose-install.yml
-
-- name: "Deploy container"
-  include_tasks: deploy-samba-container.yml
+# samba-role

@@ -7,11 +7,6 @@
       apt:
         update_cache: yes
 
-- hosts: samba
-  become: true
-  roles:
-    - samba-role
-
 - hosts: keycloak
   become: true
   roles:

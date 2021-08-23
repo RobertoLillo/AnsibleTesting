@@ -1,5 +1,5 @@
 [samba]
-vm1
+samba.diinf.lan
 
 [keycloak]
-vm2
+keycloak.diinf.cl
