@@ -1,0 +1,6 @@
+---
+# tasks file for keycloak
+- name: update test
+  apt:
+    update_cache: yes
+  changed_when: false
