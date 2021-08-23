@@ -1,0 +1,9 @@
+---
+# tasks file for keycloak
+- name: Copy docker-compose to server
+  copy:
+    src: docker-compose.yml
+    dest: ~/docker-compose.yml
+    owner: root
+    group: root
+    mode: 0644
