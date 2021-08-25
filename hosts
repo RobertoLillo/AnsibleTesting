@@ -1,5 +1,5 @@
-[samba]
+[directoryServers]
 samba.diinf.lan
 
-[keycloak]
+[authServers]
 keycloak.diinf.cl

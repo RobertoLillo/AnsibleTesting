@@ -1,0 +1,10 @@
+---
+- name: "Update repository index"
+  apt:
+    update_cache: yes
+
+- name: "Docker engine installation" 
+  include_tasks: docker-install.yml
+
+- name: "Docker Compose installation"
+  include_tasks: compose-install.yml

@@ -1,13 +1,15 @@
 ---
 - hosts: all
   become: true
-  pre_tasks:
+  roles:
+    - common
 
-    - name: "Update repository index"
-      apt:
-        update_cache: yes
-
-- hosts: keycloak
+- hosts: directoryServers
   become: true
   roles:
-    - keycloak-role
+    - samba
+
+- hosts: authServers
+  become: true
+  roles:
+    - keycloak

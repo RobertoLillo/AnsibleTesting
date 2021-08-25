@@ -1,0 +1,43 @@
+---
+version: '3'
+ 
+volumes:
+  postgres_data:
+      driver: local
+ 
+services:
+  postgres:
+      image: postgres:13.3
+      container_name: postgres_db
+      hostname: postgres
+      restart: unless-stopped
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_DB: keycloak
+        POSTGRES_USER: keycloak
+        POSTGRES_PASSWORD: keycloakPassword
+      ports:
+        - 5432:5432
+  keycloak:
+      image: quay.io/keycloak/keycloak:14.0.0
+      container_name: keycloak_app
+      hostname: keycloak
+      restart: unless-stopped
+      volumes:
+        - /home/robert/sambaCert.pem:/opt/jboss/keycloak/sambaCert.pem
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: postgres
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_SCHEMA: public
+        DB_PASSWORD: keycloakPassword
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: Diinf1*
+      ports:
+        - 443:8443
+      extra_hosts:
+        - samba.diinf.lan:10.0.2.4
+      depends_on:
+        - postgres

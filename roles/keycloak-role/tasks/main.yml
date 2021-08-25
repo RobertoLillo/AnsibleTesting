@@ -1,9 +1,0 @@
----
-- name: "Install Docker" 
-  include_tasks: docker-install.yml
-
-- name: "Install Docker-Compose"
-  include_tasks: compose-install.yml
-  
-- name: "Deploy container"
-  include_tasks: deploy-keycloak-container.yml
