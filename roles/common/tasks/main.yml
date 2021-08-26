@@ -1,10 +1,14 @@
 ---
-- name: "Update repository index"
-  apt:
-    update_cache: yes
+- name: "Update repository & check installed packages"
+  include_tasks: checkPackages.yml
 
 - name: "Docker engine installation" 
-  include_tasks: docker-install.yml
+  include_tasks: dockerInstall.yml
+  when: dockerInstalled is failed
 
-- name: "Docker Compose installation"
-  include_tasks: compose-install.yml
+- name: "Pip Installation"
+  include_tasks: pipInstall.yml
+  when: pipInstalled is failed
+
+- name: "Install required Python packages"
+  include_tasks: pipPackagesInstall.yml

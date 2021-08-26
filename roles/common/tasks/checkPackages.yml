@@ -1,0 +1,16 @@
+---
+- name: "Update repository index"
+  apt:
+    update_cache: yes
+
+- name: "Check if Docker is already installed"
+  command: docker --version
+  register: dockerInstalled
+  changed_when: false
+  ignore_errors: true
+
+- name: "Check if Pip is already installed"
+  command: pip --version
+  register: pipInstalled
+  changed_when: false
+  ignore_errors: true

@@ -1,10 +1,18 @@
 ---
 - name: "Get SAMBA SSL certificate"
-  include_tasks: copy-certificate.yml
+  include_tasks: getSambaCertificate.yml
+
+- name: "Copy theme files to server"
+  copy:
+    src: DIINF
+    dest: /home/robert
+    owner: root
+    group: root
+    mode: 0644
 
 - name: "Deploy keycloak_app & postgres_db containers"
-  include_tasks: deploy-keycloak-container.yml
+  include_tasks: deployKeycloakContainer.yml
 
-- name: "Add SAMBA SSL certificate to cacerts"
-  shell:
-    cmd: "docker exec -u 0 keycloak_app keytool -import -trustcacerts -file /opt/jboss/keycloak/sambaCert.pem -alias samba.diinf.lan -keystore /usr/lib/jvm/java-11-openjdk-11.0.11.0.9-2.el8_4.x86_64/lib/security/cacerts -storepass changeit -noprompt"
+#- name: "Add SAMBA SSL certificate to cacerts"
+#  shell:
+#    cmd: "docker exec -u 0 keycloak_app keytool -import -trustcacerts -file /opt/jboss/keycloak/sambaCert.pem -alias samba.diinf.lan -keystore /usr/lib/jvm/java-11-openjdk-11.0.11.0.9-2.el8_4.x86_64/lib/security/cacerts -storepass changeit -noprompt"

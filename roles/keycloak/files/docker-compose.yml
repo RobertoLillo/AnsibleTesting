@@ -26,6 +26,7 @@ services:
       restart: unless-stopped
       volumes:
         - /home/robert/sambaCert.pem:/opt/jboss/keycloak/sambaCert.pem
+        - /home/robert/DIINF:/opt/jboss/keycloak/themes/DIINF
       environment:
         DB_VENDOR: POSTGRES
         DB_ADDR: postgres
