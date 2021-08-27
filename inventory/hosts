@@ -1,0 +1,5 @@
+[directoryServers]
+samba.diinf.lan
+
+[authServers]
+keycloak.diinf.tk

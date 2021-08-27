@@ -1,7 +1,0 @@
----
-- name: "Deploy samba-ad container"
-  include_tasks: deploy-samba-container.yml
-
-- name: "Wait 5 seconds for SAMBA to start"
-  wait_for:
-    timeout: 5

@@ -7,9 +7,14 @@
 - hosts: directoryServers
   become: true
   roles:
-    - samba
+    - sambaServer
 
 - hosts: authServers
   become: true
   roles:
-    - keycloak
+    - keycloakServer
+
+- hosts: authServers
+  become: true
+  roles:
+    - keycloakConfig

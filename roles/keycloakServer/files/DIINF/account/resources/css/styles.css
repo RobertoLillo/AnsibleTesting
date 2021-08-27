@@ -1,0 +1,24 @@
+body {
+  --pf-global--BackgroundColor--dark-100: #2a4586;
+  --pf-global--Color--100: #000000;
+}
+
+.pf-c-page__header{
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,.2);
+}
+
+.pf-c-nav__list .pf-c-nav__link {
+  --pf-c-nav__list-link--Color: #2a4586;
+  --pf-c-nav__list-link--m-current--Color: #ff9029;
+}
+
+.pf-c-nav__simple-list .pf-c-nav__link {
+  --pf-c-nav__simple-list-link--Color: #2a4586;
+  --pf-c-nav__simple-list-link--m-current--Color: #ff9029;
+}
+
+.pf-c-brand.brand{
+  -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
+  -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+  filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+}

@@ -1,0 +1,12 @@
+---
+- name: "Copy docker-compose.yml to server"
+  copy:
+    src: docker-compose.yml
+    dest: /home/robert/docker-compose.yml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "Deploy container with docker-compose up"
+  shell:
+    cmd: "docker-compose up -d"

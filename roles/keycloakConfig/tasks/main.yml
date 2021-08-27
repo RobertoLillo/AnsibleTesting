@@ -1,0 +1,6 @@
+---
+- name: "Get OIDC AUTH token from Keycloak"
+  include_tasks: get_OIDC_token.yml
+
+- name: "Add {{ keycloak_realm_name }} realm to Keycloak"
+  include_tasks: create_realm.yml

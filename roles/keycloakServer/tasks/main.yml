@@ -1,0 +1,12 @@
+---
+- name: "Copy SSL certificates to server"
+  include_tasks: add_certs.yml
+  
+- name: "Get SAMBA SSL certificate to Server"
+  include_tasks: get_samba_certificate.yml
+
+- name: "Copy theme files to server"
+  include_tasks: add_theme.yml
+
+- name: "Deploy keycloak_app & postgres_db containers"
+  include_tasks: deploy_keycloak_container.yml
