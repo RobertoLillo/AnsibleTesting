@@ -1,9 +1,21 @@
 ---
-- name: "Add Google as identity provider"
+- name: "Find out if {{ id_provider_name }} Provider exists"
   uri:
-    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ keycloak_realm_name }}/identity-provider/instances"
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ realm_name }}/identity-provider/instances/{{ id_provider_name }}"
+    method: GET
+    status_code:
+     - 200
+     - 404
+    headers:
+      Accept: "application/json"
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+  register: provider_exists
+
+- name: "Add {{ id_provider_name }} as Identity Provider"
+  uri:
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ realm_name }}/identity-provider/instances"
     method: POST
-    src: "{{ keycloak_federation_data_file }}"
+    src: "{{ id_provider_data_file }}"
     remote_src: "no"
     status_code:
      - 201
@@ -11,4 +23,5 @@
       Content-type: "application/json"
       Accept: "application/json"
       Authorization: "Bearer {{ keycloak_token.json.access_token }}"
-  register: keycloak_federation_config
+  register: keycloak_id_provider_config
+  when: provider_exists.status == 404

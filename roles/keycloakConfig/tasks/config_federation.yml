@@ -1,9 +1,21 @@
 ---
-- name: "Add SAMBA as User Federation provider"
+- name: "Find out if {{ federation_name }} Federation exists"
   uri:
-    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ keycloak_realm_name }}/components"
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ realm_name }}/components/{{ federation_name }}"
+    method: GET
+    status_code:
+     - 200
+     - 404
+    headers:
+      Accept: "application/json"
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+  register: federation_exists
+
+- name: "Add {{ federation_name }} as User Federation Provider"
+  uri:
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ realm_name }}/components"
     method: POST
-    src: "{{ keycloak_federation_data_file }}"
+    src: "{{ federation_data_file }}"
     remote_src: "no"
     status_code:
      - 201
@@ -12,3 +24,4 @@
       Accept: "application/json"
       Authorization: "Bearer {{ keycloak_token.json.access_token }}"
   register: keycloak_federation_config
+  when: federation_exists.status == 404

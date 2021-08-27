@@ -12,9 +12,9 @@
     cmd: "docker-compose up -d"
 
 # change for something that can check the status of the server (some endpoint)
-- name: "Wait 15 seconds for Keycloak to start"
+- name: "Wait 30 seconds for Keycloak to start"
   wait_for:
-    timeout: 15
+    timeout: 30
 
 - name: "Add SAMBA SSL certificate to cacerts"
   shell:

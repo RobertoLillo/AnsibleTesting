@@ -1,0 +1,41 @@
+---
+- name: "Change master realm localization to spanish"
+  uri:
+    url: "{{ keycloak_base_url }}/auth/admin/realms/master"
+    method: PUT
+    src: "{{ keycloak_realm_data_file }}"
+    remote_src: "no"
+    status_code:
+     - 204
+    headers:
+      Content-type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+  register: master_realm_update
+
+- name: "Find out if Realm {{ realm_name }} exists"
+  uri:
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ realm_name }}"
+    method: GET
+    status_code:
+     - 200
+     - 404
+    headers:
+      Accept: "application/json"
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+  register: realm_exists
+
+- name: "Create Realm {{ realm_name }}"
+  uri:
+    url: "{{ keycloak_base_url }}/auth/admin/realms"
+    method: POST
+    src: "{{ realm_data_file }}"
+    remote_src: "no"
+    status_code:
+     - 201
+    headers:
+      Content-type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+  register: keycloak_realm_create
+  when: realm_exists.status == 404

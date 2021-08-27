@@ -1,4 +1,5 @@
 {
+    "id": "Samba",
     "name": "samba.diinf.lan",
     "providerId": "ldap",
     "providerType": "org.keycloak.storage.UserStorageProvider",
