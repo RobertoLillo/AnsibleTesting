@@ -10,3 +10,7 @@
 - name: "Deploy container with docker-compose up"
   shell:
     cmd: "docker-compose up -d"
+
+- name: "Wait 10 seconds for Samba to get ready"
+  wait_for:
+    timeout: 10
