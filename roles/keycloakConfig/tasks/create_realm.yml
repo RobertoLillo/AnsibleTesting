@@ -1,5 +1,5 @@
 ---
-- name: "Find out, if Realm {{ keycloak_realm_name }} for service Keycloak exists"
+- name: "Find out if Realm {{ keycloak_realm_name }} exists"
   uri:
     url: "{{ keycloak_base_url }}/auth/admin/realms/{{ keycloak_realm_name }}"
     method: GET
@@ -11,7 +11,7 @@
       Authorization: "Bearer {{ keycloak_token.json.access_token }}"
   register: keycloak_realm_exists
 
-- name: "Create Realm {{ keycloak_realm_name }} for service Keycloak"
+- name: "Create Realm {{ keycloak_realm_name }}"
   uri:
     url: "{{ keycloak_base_url }}/auth/admin/realms"
     method: POST

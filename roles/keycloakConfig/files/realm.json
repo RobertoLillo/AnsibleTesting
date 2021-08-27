@@ -1,13 +1,13 @@
 {
-  "id": "DIINF",
-  "realm": "DIINF",
-  "displayName": "DIINF",
-  "enabled": true,
-  "sslRequired": "external",
-  "registrationAllowed": false,
-  "loginWithEmailAllowed": true,
-  "duplicateEmailsAllowed": false,
-  "resetPasswordAllowed": false,
-  "editUsernameAllowed": false,
-  "bruteForceProtected": true
+    "id": "DIINF",
+    "realm": "DIINF",
+    "displayName": "DIINF",
+    "enabled": true,
+    "internationalizationEnable": true,
+    "loginTheme": "DIINF",
+    "accountTheme": "DIINF",
+    "supportedLocales": [
+        "es"
+    ],
+    "defaultLocale": "es"
 }

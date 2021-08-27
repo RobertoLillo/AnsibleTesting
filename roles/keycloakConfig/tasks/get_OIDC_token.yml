@@ -1,5 +1,5 @@
 ---
-- name: "Create Token for service Keycloak"
+- name: "Get OIDC access token"
   uri:
     url: "{{ keycloak_base_url }}/auth/realms/master/protocol/openid-connect/token"
     method: POST

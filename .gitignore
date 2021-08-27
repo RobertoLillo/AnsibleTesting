@@ -1,2 +1,3 @@
-roles/keycloak/files/DIINF
-roles/keycloak/files/certs
+roles/keycloakServer/files/DIINF
+roles/keycloakServer/files/certs
+roles/keycloakConfig/files/google.json

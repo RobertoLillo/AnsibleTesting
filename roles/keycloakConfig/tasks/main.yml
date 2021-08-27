@@ -4,3 +4,9 @@
 
 - name: "Add {{ keycloak_realm_name }} realm to Keycloak"
   include_tasks: create_realm.yml
+
+- name: "Set up User Storage Federation on realm {{ keycloak_realm_name }}"
+  include_tasks: config_federation.yml
+
+- name: "Set up Identity Providers on realm {{ keycloak_realm_name }}"
+  include_tasks: config_id_providers.yml
