@@ -13,8 +13,4 @@
   become: true
   roles:
     - keycloakServer
-
-- hosts: authServers
-  become: true
-  roles:
     - keycloakConfig
