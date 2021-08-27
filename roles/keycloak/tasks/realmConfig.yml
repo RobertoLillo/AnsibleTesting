@@ -1,0 +1,62 @@
+---
+- name: "Set facts"
+  set_fact:
+    keycloak_admin_user: "admin"
+    keycloak_admin_pass: "Diinf1*"
+    keycloak_base_url: "https://keycloak.diinf.tk"
+    keycloak_realm_name: "DIINF"
+    keycloak_realm_data_file: "realm.json"
+
+- name: "Create Token for service Keycloak"
+  uri:
+    url: "{{ keycloak_base_url }}/auth/realms/master/protocol/openid-connect/token"
+    method: POST
+    body_format: form-urlencoded
+    body:
+      username: "{{ keycloak_admin_user }}"
+      password: "{{ keycloak_admin_pass }}"
+      grant_type: "password"
+      client_id: "admin-cli"
+  register: keycloak_token
+
+- name: "Find out, if Realm {{ keycloak_realm_name }} for service Keycloak exists"
+  uri:
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ keycloak_realm_name }}"
+    method: GET
+    status_code:
+     - 200
+     - 404
+    headers:
+      Accept: "application/json"
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+  register: keycloak_realm_exists
+
+- name: "Create Realm {{ keycloak_realm_name }} for service Keycloak"
+  uri:
+    url: "{{ keycloak_base_url }}/auth/admin/realms"
+    method: POST
+    src: "{{ keycloak_realm_data_file }}"
+    remote_src: "no"
+    status_code:
+     - 201
+    headers:
+      Content-type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+  register: keycloak_realm_create
+  when: "keycloak_realm_exists.status == 404"
+
+- name: "Update Realm {{ keycloak_realm_name }} for service Keycloak"
+  uri:
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ keycloak_realm_name }}"
+    method: PUT
+    src: "{{ keycloak_realm_data_file }}"
+    remote_src: "no"
+    status_code:
+     - 204
+    headers:
+      Content-type: "application/json"
+      Accept: "application/json"
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+  register: keycloak_realm_create
+  when: "keycloak_realm_exists.status == 200"

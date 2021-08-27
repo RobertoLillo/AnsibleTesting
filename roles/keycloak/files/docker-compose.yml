@@ -25,6 +25,7 @@ services:
       hostname: keycloak
       restart: unless-stopped
       volumes:
+        - /home/robert/certs:/etc/x509/https
         - /home/robert/sambaCert.pem:/opt/jboss/keycloak/sambaCert.pem
         - /home/robert/DIINF:/opt/jboss/keycloak/themes/DIINF
       environment:
@@ -40,5 +41,6 @@ services:
         - 443:8443
       extra_hosts:
         - samba.diinf.lan:10.0.2.4
+        - keycloak.diinf.tk:10.0.2.5
       depends_on:
         - postgres

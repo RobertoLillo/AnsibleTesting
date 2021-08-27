@@ -1,0 +1,8 @@
+---
+- name: "Copy theme files"
+  copy:
+    src: DIINF
+    dest: /home/robert
+    owner: root
+    group: root
+    mode: 0644
