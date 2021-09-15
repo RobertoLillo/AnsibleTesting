@@ -1,3 +1,2 @@
-roles/keycloakServer/files/DIINF
-roles/keycloakServer/files/certs
+roles/keycloak/files/certs
 roles/keycloakConfig/files/google_id_provider.json

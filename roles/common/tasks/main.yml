@@ -1,14 +1,4 @@
 ---
-- name: "Update repository & check installed packages"
-  include_tasks: check_packages.yml
-
-- name: "Docker engine installation" 
-  include_tasks: docker_install.yml
-  when: docker_installed is failed
-
-- name: "Pip Installation"
-  include_tasks: pip_install.yml
-  when: pip_installed is failed
-
-- name: "Install required Python packages"
-  include_tasks: pip_packages_install.yml
+- name: "Update repository index"
+  apt:
+    update_cache: yes

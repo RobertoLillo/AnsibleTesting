@@ -3,14 +3,17 @@
   become: true
   roles:
     - common
+    - docker
+    - dockerCompose
+    - pip
 
 - hosts: directoryServers
   become: true
   roles:
-    - sambaServer
+    - samba
 
 - hosts: authServers
   become: true
   roles:
-    - keycloakServer
+    - keycloak
     - keycloakConfig

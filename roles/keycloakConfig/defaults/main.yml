@@ -1,2 +1,20 @@
 ---
-# defaults file for keycloakConfig
+# Keycloak information
+keycloak_base_url: "https://keycloak.diinf.tk"
+keycloak_admin_user: "admin"
+keycloak_admin_pass: "Diinf1*"
+
+# Keycloak master realm information
+keycloak_realm_data_file: "master_realm.json"
+
+# New realm information
+realm_name: "DIINF"
+realm_data_file: "diinf_realm.json"
+
+# New realm federation information
+federation_name: "Samba"
+federation_data_file: "samba_federation.json"
+
+# New realm services configuration
+id_provider_name: "google"
+id_provider_data_file: "google_id_provider.json"
