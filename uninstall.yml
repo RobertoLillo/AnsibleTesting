@@ -1,0 +1,58 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: "Stop containers"
+      shell:
+        cmd: "docker-compose down"
+      ignore_errors: true
+
+    - name: "Delete volumes"
+      shell:
+        cmd: "docker volume rm $(docker volume ls -q)"
+      ignore_errors: true
+
+    - name: "Uninstall Docker packages"
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: absent
+        purge: yes
+
+    - name: "Uninstall Docker-Compose"
+      file:
+        path: /usr/local/bin/docker-compose
+        state: absent
+
+- hosts: directoryServers
+  become: true
+  tasks:
+    - name: "Remove docker-compose file"
+      file:
+        path: /home/robert/docker-compose.yml
+        state: absent
+
+- hosts: authServers
+  become: true
+  tasks:
+    - name: "Remove docker-compose file"
+      file:
+        path: /home/robert/docker-compose.yml
+        state: absent
+
+    - name: "Remove samba certificate file"
+      file:
+        path: /home/robert/sambaCert.pem
+        state: absent
+
+    - name: "Remove theme folder"
+      file:
+        path: /home/robert/DIINF
+        state: absent
+
+    - name: "Remove certificates folder"
+      file:
+        path: /home/robert/certs
+        state: absent

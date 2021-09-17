@@ -6,5 +6,5 @@
   ignore_errors: true
 
 - name: "Install Docker"
-  include_tasks: installDocker.yml
+  include_tasks: install_docker.yml
   when: docker_installed is failed

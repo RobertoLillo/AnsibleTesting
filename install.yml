@@ -1,18 +1,23 @@
 ---
 - hosts: all
+  tags:
+    - packages
   become: true
   roles:
     - common
     - docker
     - dockerCompose
-    - pip
 
 - hosts: directoryServers
+  tags:
+    - directory
   become: true
   roles:
     - samba
 
 - hosts: authServers
+  tags:
+    - authentication
   become: true
   roles:
     - keycloak
