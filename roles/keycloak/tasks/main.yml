@@ -1,12 +1,22 @@
 ---
-- name: "Copy SSL certificates to server"
-  include_tasks: add_certs.yml
-  
-- name: "Get SAMBA SSL certificate to Server"
-  include_tasks: get_samba_certificate.yml
+- name: "Clone Keycloak theme repository"
+  ansible.builtin.git:
+    repo: "{{ theme_repository }}"
+    dest: /opt/sistema-centralizado
 
-#- name: "Copy theme files to server"
-#  include_tasks: add_theme.yml
+- name: "Copy docker-compose.yml to server"
+  copy:
+    src: docker-compose.yml
+    dest: /opt/sistema-centralizado/docker-compose.yml
+    owner: root
+    group: root
+    mode: 0644
 
-- name: "Deploy keycloak_app & postgres_db containers"
-  include_tasks: deploy_keycloak_container.yml
+- name: "Deploy containers with Docker-Compose"
+  shell:
+    cmd: "docker-compose -f /opt/sistema-centralizado/docker-compose.yml up -d"
+
+- name: "Wait for Keycloak to get ready"
+  wait_for:
+    host: "{{ keycloak_server_ip }}"
+    port: 443

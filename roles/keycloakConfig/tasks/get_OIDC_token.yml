@@ -9,4 +9,5 @@
       password: "{{ keycloak_admin_pass }}"
       grant_type: "password"
       client_id: "admin-cli"
+    validate_certs: no
   register: keycloak_token

@@ -1,4 +1,10 @@
 ---
+# --- Toggles ---
+enable_federation: false        # Turns on or off the federation configuration on Keycloak
+enable_identity_provider: false # Turns on or off the identity provider configuration on Keycloak
+
+
+
 # Keycloak information
 keycloak_base_url: "https://keycloak.diinf.tk"
 keycloak_admin_user: "admin"

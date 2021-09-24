@@ -7,7 +7,7 @@
     group: root
     mode: 0644
 
-- name: "Deploy container with docker-compose up"
+- name: "Deploy container with Docker-Compose"
   shell:
     cmd: "docker-compose -f /opt/sistema-centralizado/docker-compose.yml up -d"
 

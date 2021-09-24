@@ -1,4 +1,0 @@
----
-- name: "Copy SAMBA SSL cert"
-  shell:
-    cmd: "openssl s_client -connect {{ samba_server_ip }}:636 </dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > sambaCert.pem"
