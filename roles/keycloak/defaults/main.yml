@@ -1,2 +1,6 @@
 ---
-samba_server: 10.0.2.4
+# --- Keycloak server IP ---
+keycloak_server_ip: 10.0.2.5
+
+# --- Keycloak FQDN ---
+keycloak_server_fqdn: keycloak.diinf.tk

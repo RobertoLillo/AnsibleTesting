@@ -1,0 +1,20 @@
+---
+# --- Docker installation variables ---
+docker_ce_version: 5:20.10.7~3-0~ubuntu-focal
+docker_ce_cli_version: 5:20.10.7~3-0~ubuntu-focal
+containerd_io_version: 1.4.9-1
+
+# --- Docker-Compose installation variables ---
+docker_compose_version: 1.29.2
+
+# --- Samba server IP ---
+samba_server_ip: 10.0.2.4
+
+# --- Samba FQDN ---
+samba_server_fqdn: samba.diinf.lan
+
+# --- Keycloak server IP ---
+keycloak_server_ip: 10.0.2.5
+
+# --- Keycloak FQDN ---
+keycloak_server_fqdn: keycloak.diinf.tk

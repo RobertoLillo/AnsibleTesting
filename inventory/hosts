@@ -1,5 +1,5 @@
-[directoryServers]
-samba.diinf.lan
+[directoryServer]
+samba.diinf.lan ansible_host=10.0.2.4
 
-[authServers]
-keycloak.diinf.tk
+[authServer]
+keycloak.diinf.tk ansible_host=10.0.2.5

@@ -1,10 +1,8 @@
 ---
-- name: "Check if Docker is already installed"
-  command: docker --version
-  register: docker_installed
-  changed_when: false
-  ignore_errors: true
+- name: "Gather packages facts"
+  ansible.builtin.package_facts:
+    manager: auto
 
 - name: "Install Docker"
   include_tasks: install_docker.yml
-  when: docker_installed is failed
+  when: "'docker-ce' not in ansible_facts.packages"

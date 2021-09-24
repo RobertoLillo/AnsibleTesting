@@ -1,21 +1,21 @@
 ---
 - hosts: all
   tags:
-    - packages
+    - setup
   become: true
   roles:
     - common
     - docker
     - dockerCompose
 
-- hosts: directoryServers
+- hosts: directoryServer
   tags:
     - directory
   become: true
   roles:
     - samba
 
-- hosts: authServers
+- hosts: authServer
   tags:
     - authentication
   become: true

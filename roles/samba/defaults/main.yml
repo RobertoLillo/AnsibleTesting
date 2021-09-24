@@ -1,2 +1,6 @@
 ---
-# defaults file for samba-role
+# --- Samba server IP ---
+samba_server_ip: 10.0.2.4
+
+# --- Samba FQDN ---
+samba_server_fqdn: samba.diinf.lan

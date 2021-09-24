@@ -1,3 +1,17 @@
 ---
-- name: "Deploy samba-ad container"
-  include_tasks: deploy_samba_container.yml
+- name: "Copy docker-compose.yml to server"
+  copy:
+    src: docker-compose.yml
+    dest: /opt/sistema-centralizado/docker-compose.yml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "Deploy container with docker-compose up"
+  shell:
+    cmd: "docker-compose -f /opt/sistema-centralizado/docker-compose.yml up -d"
+
+- name: "Wait for Samba to open port 636"
+  wait_for:
+    host: "{{ samba_server_ip }}"
+    port: 636
