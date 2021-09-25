@@ -25,7 +25,7 @@ services:
       hostname: keycloak
       restart: unless-stopped
       volumes:
-        - /opt/sistema-centralizado/sambaCert.pem:/opt/jboss/keycloak/sambaCert.pem
+        - /opt/sistema-centralizado/sambaCert:/opt/jboss/keycloak/sambaCert
         - /opt/sistema-centralizado/DIINF:/opt/jboss/keycloak/themes/DIINF
       environment:
         DB_VENDOR: POSTGRES
