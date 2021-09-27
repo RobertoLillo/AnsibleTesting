@@ -11,6 +11,9 @@
       Authorization: "Bearer {{ keycloak_token.json.access_token }}"
     validate_certs: no
   register: provider_exists
+  tags:
+    - keycloak_config
+    - identity_provider
 
 - name: "Add {{ id_provider_name }} as Identity Provider"
   uri:
@@ -27,3 +30,6 @@
     validate_certs: no
   register: keycloak_id_provider_config
   when: provider_exists.status == 404
+  tags:
+    - keycloak_config
+    - identity_provider

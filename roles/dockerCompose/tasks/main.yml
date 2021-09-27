@@ -1,8 +1,10 @@
 ---
-- name: Ansible check directory exists example.
+- name: Check Docker-Compose installation directory.
   stat:
     path: /usr/local/bin/docker-compose
   register: docker_compose_bin
+  tags:
+    - docker_compose
 
 - name: "Install Docker Compose"
   get_url: 
@@ -10,3 +12,5 @@
     dest: /usr/local/bin/docker-compose
     mode: 'a+x'
   when: docker_compose_bin.stat.exists == False
+  tags:
+    - docker_compose

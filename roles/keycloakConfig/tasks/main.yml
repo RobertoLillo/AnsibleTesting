@@ -1,18 +1,33 @@
 ---
-- name: "Get Samba SSL certificate"
-  include_tasks: get_samba_cert.yml
-  when: enable_federation == true
-
 - name: "Get OIDC AUTH token from Keycloak"
   include_tasks: get_OIDC_token.yml
+  tags:
+    - keycloak_config
+    - federation
+    - identity_provider
 
 - name: "Change localization and add {{ realm_name }} realm"
   include_tasks: config_realm.yml
+  tags:
+    - keycloak_config
+
+- name: "Get Samba SSL certificate"
+  include_tasks: get_samba_cert.yml
+  when: enable_federation == true
+  tags:
+    - keycloak_config
+    - federation
 
 - name: "Set up User Storage Federation on realm {{ realm_name }}"
   include_tasks: config_federation.yml
   when: enable_federation == true
+  tags:
+    - keycloak_config
+    - federation
 
 - name: "Set up Identity Providers on realm {{ realm_name }}"
   include_tasks: config_id_providers.yml
   when: enable_identity_provider == true
+  tags:
+    - keycloak_config
+    - identity_provider

@@ -3,6 +3,9 @@
   ansible.builtin.git:
     repo: "{{ theme_repository }}"
     dest: /opt/sistema-centralizado
+  tags:
+    - keycloak
+    - theme_update
 
 - name: "Copy docker-compose.yml to server"
   copy:
@@ -11,12 +14,18 @@
     owner: root
     group: root
     mode: 0644
+  tags:
+    - keycloak
 
 - name: "Deploy containers with Docker-Compose"
   shell:
     cmd: "docker-compose -f /opt/sistema-centralizado/docker-compose.yml up -d"
+  tags:
+    - keycloak
 
 - name: "Wait for Keycloak to get ready"
   wait_for:
     host: "{{ keycloak_server_ip }}"
     port: 443
+  tags:
+    - keycloak

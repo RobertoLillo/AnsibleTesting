@@ -2,7 +2,11 @@
 - name: "Gather packages facts"
   ansible.builtin.package_facts:
     manager: auto
+  tags:
+    - docker
 
 - name: "Install Docker"
   include_tasks: install_docker.yml
   when: "'docker-ce' not in ansible_facts.packages"
+  tags:
+    - docker

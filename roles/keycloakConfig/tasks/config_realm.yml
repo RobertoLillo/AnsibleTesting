@@ -13,6 +13,8 @@
       Authorization: "Bearer {{ keycloak_token.json.access_token }}"
     validate_certs: no
   register: master_realm_update
+  tags:
+    - keycloak_config
 
 - name: "Find out if Realm {{ realm_name }} exists"
   uri:
@@ -26,6 +28,8 @@
       Authorization: "Bearer {{ keycloak_token.json.access_token }}"
     validate_certs: no
   register: realm_exists
+  tags:
+    - keycloak_config
 
 - name: "Create Realm {{ realm_name }}"
   uri:
@@ -42,3 +46,5 @@
     validate_certs: no
   register: keycloak_realm_create
   when: realm_exists.status == 404
+  tags:
+    - keycloak_config

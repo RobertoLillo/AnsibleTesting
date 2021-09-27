@@ -1,7 +1,7 @@
 ---
 - hosts: all
   tags:
-    - setup
+    - basic_setup
   become: true
   roles:
     - common
@@ -10,14 +10,14 @@
 
 - hosts: directoryServer
   tags:
-    - directory
+    - samba_setup
   become: true
   roles:
     - samba
 
 - hosts: authServer
   tags:
-    - authentication
+    - keycloak_setup
   become: true
   roles:
     - keycloak

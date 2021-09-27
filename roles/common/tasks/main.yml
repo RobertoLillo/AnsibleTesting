@@ -2,6 +2,8 @@
 - name: "Update repository index"
   apt:
     update_cache: yes
+  tags:
+    - common
     
 - name: "Add IP address of every hosts to all hosts"
   lineinfile:
@@ -11,8 +13,13 @@
     state: present
   when: hostvars[item].ansible_host is defined
   with_items: "{{ groups.all }}"
+  tags:
+    - common
+    - host_update
 
 - name: "Create installation directory"
   file:
     path: /opt/sistema-centralizado
     state: directory
+  tags:
+    - common

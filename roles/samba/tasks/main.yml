@@ -6,12 +6,18 @@
     owner: root
     group: root
     mode: 0644
+  tags: 
+    - samba
 
 - name: "Deploy container with Docker-Compose"
   shell:
     cmd: "docker-compose -f /opt/sistema-centralizado/docker-compose.yml up -d"
+  tags: 
+    - samba
 
 - name: "Wait for Samba to open port 636"
   wait_for:
     host: "{{ samba_server_ip }}"
     port: 636
+  tags: 
+    - samba

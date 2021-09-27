@@ -9,6 +9,8 @@
       - runc
     state: absent
     purge: yes
+  tags:
+    - docker
 
 - name: "Install Docker packages"
   apt:
@@ -19,16 +21,22 @@
       - gnupg
     state: present
     update_cache: yes
+  tags:
+    - docker
 
 - name: "Add Docker GPG key"
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
+  tags:
+    - docker
 
 - name: "Set up the stable repository"
   apt_repository:
     repo: deb https://download.docker.com/linux/ubuntu focal stable
     state: present
+  tags:
+    - docker
 
 - name: "Install Docker engine"
   apt:
@@ -38,6 +46,8 @@
       - containerd.io={{ containerd_io_version }}
     state: present
     update_cache: yes
+  tags:
+    - docker
 
 - name: "Unmask, start and enable Docker service"
   systemd:
@@ -45,3 +55,5 @@
     masked: no
     state: started
     enabled: yes
+  tags:
+    - docker

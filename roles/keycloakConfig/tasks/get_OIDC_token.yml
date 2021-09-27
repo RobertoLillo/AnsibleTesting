@@ -11,3 +11,7 @@
       client_id: "admin-cli"
     validate_certs: no
   register: keycloak_token
+  tags:
+    - keycloak_config
+    - federation
+    - identity_provider
