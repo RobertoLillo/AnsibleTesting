@@ -42,7 +42,7 @@ El archivo de hosts por defecto es el siguiente:
 
 En **vars.yml** se pueden encontrar multiples variables que afectan la ejecución del *playbook* y modifican valores de los servicios desplegados. 
 
-Primero en la sección ***Toggles*** se encuentran las variables que determinan si las tareas relacionadas a la federación de usuarios o proveedores de identidad serán ejecutadas, esto implica si estas configuraciones serán o no aplicadas al servidor de Keycloak. Esto permite desplegar el servidor de Keycloak limpio de configuraciones o sólo con la configuración que se desea probar, también, deshabilitar la federación permite desplegar Keycloak sin la necesidad de tener previamente un servidor de Samba AD.
+Primero en la sección ***Toggles*** se encuentran las variables que determinan si las tareas relacionadas a la federación de usuarios o proveedores de identidad serán ejecutadas, esto implica si estas configuraciones serán o no aplicadas al servidor de Keycloak. Esto permite desplegar el servidor de Keycloak limpio de configuraciones o sólo con la configuración que se desea probar, en el caso de que sea necesario deshabilitar la federación permite desplegar Keycloak sin la necesidad de tener previamente un servidor de Samba AD.
 
     # --- Toggles ---
     enable_federation: true	        # Turns ON or OFF the federation configuration on Keycloak
@@ -69,3 +69,44 @@ Finalmente, la última sección contiene las variables que son utilizadas en los
     # Server FQDNs
     samba_server_fqdn: samba.diinf.lan
     keycloak_server_fqdn: keycloak.diinf.tk
+
+## Ejecución
+
+Luego de realizar las configuraciones necesarias en **hosts.yml** y **vars.yml** es posible ejecutar el *playbook* mediante el comando:
+
+    ansible-playbook -K setup.yml
+
+La opción **-K** (o también **-\-ask-become-pass**) consultará por la contraseña de la cuenta utilizada para ingresar a la máquina, de esta forma se pueden ejecutar tareas que requieren **sudo**.
+
+### Tags
+
+El comando anterior ejecuta el *playbook* en su totalidad, pero en casos que sea necesario ejecutar secciones específicas se puede utilizar una serie de ***Tags*** que determinan las tareas que serán realizadas. Esto se puede realizar mediante el siguiente comando:
+
+    ansible-playbook -K setup.yml --tags tag1,tag2,...
+
+Lista de *tags* definidos:
+
+ - **basic_setup**: ejecuta las tareas del rol ***Common***. Actualiza el repositorio de paquetes, actualiza las direcciones IP del archivo de *hosts* e instala Docker y Docker-Compose.
+
+ - **samba_setup**: ejecuta las tareas del rol ***Common*** y ***Samba***. Despliega el servicio de Samba Active Directory.
+
+ - **keycloak_setup**: ejecuta las tareas del rol ***Common***, ***Keycloak*** y ***KeycloakConfig***. Despliega el servicio de Keycloak, configurando el idioma y el tema de la interfaz de usuarios. Las configuraciones de federación y proveedores de identidad también son ejecutadas pero son dependientes de los valores ingresados en los *toggles* en el archivo **vars.yml**.
+
+ - **host_update**: ejecuta una de las tareas del rol ***Common***. Actualiza las IP y FQDN del archivo *hosts*, util si es que se hicieron cambios en las direcciones de las máquinas.
+
+ - **theme_update**: ejecuta una de las tareas del rol ***Keycloak***. Descarga la última versión del tema de la interfaz de usuarios desde el repositorio [Tema-DIINF-Keycloak](https://github.com/RobertoLillo/Tema-DIINF-Keycloak), util si es que se hicieron cambios en la interfaz.
+
+Además de los anteriores, se definieron otros *tags* principalmente para hacer *testing* a etapas específicas del *playbook*, estas pueden ser utilizadas pero no aseguran el correcto funcionamiento del servicio final al no estar diseñadas para levantar el servicio completo.
+
+ - **common**: ejecuta las tareas del rol ***Common***.
+ - **docker**: ejecuta las tareas del rol ***Docker***.
+ - **docker_compose**: ejecuta las tareas del rol ***DockerCompose***.
+ - **samba**: ejecuta las tareas del rol ***Samba***.
+ - **keycloak**: ejecuta las tareas del rol ***Keycloak***.
+ - **keycloak_config**: ejecuta las tareas del rol ***KeycloakConfig***.
+ - **federation**: ejecuta las tareas del rol ***KeycloakConfig*** relacionadas a la federación de usuarios.
+ - **identity_provider**: ejecuta las tareas del rol ***KeycloakConfig*** relacionadas a los proveedores de identidad.
+
+## Documentación
+
+Durante el periodo de investigación e implementación de este proyecto se generaron variados documentos que comparan distintas funciones entre servicios y también explican como instalar manualmente cada uno de los *software*, estos documentos se encuentran en la carpeta ***Docs*** del repositorio.
