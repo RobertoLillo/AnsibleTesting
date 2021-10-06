@@ -1,1 +1,3 @@
+roles/keycloak/files/certs/tls.key
+roles/keycloak/files/certs/tls.pem
 roles/keycloakConfig/files/google_id_provider.json
