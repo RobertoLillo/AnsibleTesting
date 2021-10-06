@@ -1,24 +1,32 @@
 ---
 - hosts: all
+  become: true
   tags:
     - basic_setup
-  become: true
+    - samba_setup
+    - keycloak_setup
   roles:
     - common
     - docker
     - dockerCompose
+  vars_files:
+    - vars.yml
 
 - hosts: directoryServer
+  become: true
   tags:
     - samba_setup
-  become: true
   roles:
     - samba
+  vars_files:
+    - vars.yml
 
 - hosts: authServer
+  become: true
   tags:
     - keycloak_setup
-  become: true
   roles:
     - keycloak
     - keycloakConfig
+  vars_files:
+    - vars.yml
