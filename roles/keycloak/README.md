@@ -16,7 +16,7 @@ Requisitos
 Variables
 --------------
 
-En el archivo **defaults.yml** se encuentran tres variables que contienen información de la máquina en la que se levanta el servicio.
+En el archivo **main.yml** en la carpeta **defaults** se encuentran tres variables que contienen información de la máquina en la que se levanta el servicio.
 
 -   **keycloak_server_ip: 10.0.2.5**
 -   **keycloak_server_fqdn: keycloak.diinf.tk**
