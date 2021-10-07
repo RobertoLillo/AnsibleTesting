@@ -6,6 +6,7 @@ Rol encargado de realizar tareas básicas de preparación en las máquinas, como
 Requisitos
 ------------
 
+ - **Permiso para ejecutar SUDO**
  - **Conexión a internet**
 
 Variables
