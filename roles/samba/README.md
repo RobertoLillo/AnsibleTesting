@@ -16,7 +16,7 @@ Requisitos
 Variables
 --------------
 
-En el archivo **defaults.yml** se encuentran dos variables que contienen información de la máquina en la que se levanta el servicio.
+En el archivo **main.yml** en la carpeta **defaults** se encuentran dos variables que contienen información de la máquina en la que se levanta el servicio.
 
  - **samba_server_ip: 10.0.2.4**
  - **samba_server_fqdn: samba.diinf.lan**
