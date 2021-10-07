@@ -1,38 +1,38 @@
-Role Name
+
+KeycloakConfig
 =========
 
-A brief description of the role goes here.
+Rol encargado de configurar el servicio de Keycloak previamente desplegado mediante el rol **Keycloak**.  Se cambia el idioma al español, se crea el ***realm*** y se aplica el tema a la interfaz de usuarios, dependiendo de las configuraciones en las variables ***toggles*** también se configura la federación de usuarios y los proveedores de identidad. Todas estas configuraciones son realizadas enviando configuraciones mediante JSON a la API de Keycloak.
 
-Requirements
+Requisitos
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+-   **Permiso para ejecutar SUDO**
+-   **Conexión a internet**
+-   **Servicio de Keycloak ya desplegado**
 
-Role Variables
+Variables
 --------------
+En el archivo **main.yml** de la carpeta **defaults** se encuentran dos sets de variables.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+**Toggles** (determinan si se activan ciertos componentes de Keycloak)
 
-Dependencies
+ - **enable_federation: true**
+ - **enable_identity_provider: true**
+
+**Otras variables**
+
+ - **keycloak_base_url: "https://keycloak.diinf.tk"**
+ - **keycloak_admin_user: "admin" keycloak_admin_pass: "Diinf1\*"**
+ - **keycloak_realm_data_file: "master_realm.json" realm_name: "DIINF"**
+ - **realm_data_file: "diinf_realm.jso federation_name: "Samba"**
+ - **federation_data_file: "samba_federation.json"**
+ - **id_provider_name: "google" id_provider_data_file: "google_id_provider.json"**
+
+Es posible modificar esta versión en el archivo **vars.yml** que se encuentra en la raíz del repositorio.
+
+Módulos utilizados
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+ - **uri**
+ - **shell**
