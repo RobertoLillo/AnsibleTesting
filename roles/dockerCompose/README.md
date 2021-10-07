@@ -19,7 +19,7 @@ En el archivo **defaults.yml** se encuentra una variable que determina la versi�
 
  - **docker_compose_version: 1.29.2**
 
-Es posible modificar esta versión en el archivo **vars.yml** que se encuentra en al raíz del repositorio.
+Es posible modificar esta versión en el archivo **vars.yml** que se encuentra en la raíz del repositorio.
 
 Dependencies
 ------------
