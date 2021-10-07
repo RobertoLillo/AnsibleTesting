@@ -14,7 +14,7 @@ Variables
 
 Utiliza variables configuradas en el archivo **hosts.yml** como ***ansible_host***, ***groups*** y ***host***. No posee ninguna variable definida en **default.yml** o **vars.yml**.
 
-Modulos utilizados
+Módulos utilizados
 ------------
 
  - **apt**
