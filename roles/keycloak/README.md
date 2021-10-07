@@ -1,38 +1,33 @@
-Role Name
+
+Keycloak
 =========
 
-A brief description of the role goes here.
+Rol encargado de desplegar el servicio de Keycloak en un estado limpio sin configuraciones. Esto se realiza mediante la ejecución de un archivo de Docker-Compose que se encuentra en la carpeta **files** de este rol. Además, se descarga el repositorio del tema a ser aplicado posteriormente en la interfaz de usuarios.
 
-Requirements
+Requisitos
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+-   **Permiso para ejecutar SUDO**
+-   **Conexión a internet**
+-   **Repositorio de paquetes actualizado**
+-   **Docker**
+-   **Docker-Compose**
 
-Role Variables
+Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+En el archivo **defaults.yml** se encuentran tres variables que contienen información de la máquina en la que se levanta el servicio.
 
-Dependencies
+-   **keycloak_server_ip: 10.0.2.5**
+-   **keycloak_server_fqdn: keycloak.diinf.tk**
+-   **theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak**
+
+Es posible modificar esta versión en el archivo  **vars.yml**  que se encuentra en la raíz del repositorio.
+
+Módulos utilizados
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+ - **git**
+ - **copy**
+ - **shell**
+ - **wait_for**
