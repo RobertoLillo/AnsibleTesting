@@ -20,7 +20,7 @@ En el archivo **defaults.yml** se encuentran tres variables que determinan la ve
  - **docker_ce_cli_version: 5:20.10.7\~3-0~ubuntu-focal**
  - **containerd_io_version: 1.4.9-1**
 
-Es posible modificar estas versiones en el archivo **vars.yml** que se encuentra en la raiz del repositorio.
+Es posible modificar estas versiones en el archivo **vars.yml** que se encuentra en la raíz del repositorio.
 
 Módulos utilizados
 ------------
