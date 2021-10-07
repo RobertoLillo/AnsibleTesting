@@ -1,8 +1,7 @@
 ---
 # --- Toggles ---
-enable_federation: false        # Turns on or off the federation configuration on Keycloak
-enable_identity_provider: false # Turns on or off the identity provider configuration on Keycloak
-
+enable_federation: true        # Turns ON or OFF the federation configuration on Keycloak
+enable_identity_provider: true # Turns ON or OFF the identity provider configuration on Keycloak
 
 
 # --- Keycloak information ---

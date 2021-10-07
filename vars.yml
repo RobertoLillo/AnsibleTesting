@@ -22,3 +22,6 @@ keycloak_server_ip: 10.0.2.5
 # Server FQDNs
 samba_server_fqdn: samba.diinf.lan
 keycloak_server_fqdn: keycloak.diinf.tk
+
+# DIINF Theme repository
+theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak
