@@ -15,7 +15,7 @@ Requisitos
 Role Variables
 --------------
 
-En el archivo **defaults.yml** se encuentra una variable que determina la versión que será instalada de Docker-Compose.
+En el archivo **main.yml** en la carpeta **defaults** se encuentra una variable que determina la versión que será instalada de Docker-Compose.
 
  - **docker_compose_version: 1.29.2**
 
