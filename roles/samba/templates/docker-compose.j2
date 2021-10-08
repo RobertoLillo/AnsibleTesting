@@ -1,0 +1,48 @@
+version: '2'
+
+services:
+
+# ----------- samba begin ----------- #
+  samba:
+    image: nowsci/samba-domain
+    container_name: {{ container_name }}
+    hostname: {{ container_hostname }}
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /data/docker/containers/samba/data/:/var/lib/samba
+      - /data/docker/containers/samba/config/samba:/etc/samba/external
+    environment:
+      - DOMAIN={{ domain_name }}
+      - DOMAINPASS={{ domain_password }}
+      - DNSFORWARDER={{ dns_forwarder }}
+      - HOSTIP={{ samba_server_ip }}
+    ports:
+      - {{ samba_server_ip }}:53:53
+      - {{ samba_server_ip }}:53:53/udp
+      - {{ samba_server_ip }}:88:88
+      - {{ samba_server_ip }}:88:88/udp
+      - {{ samba_server_ip }}:135:135
+      - {{ samba_server_ip }}:137-138:137-138/udp
+      - {{ samba_server_ip }}:139:139
+      - {{ samba_server_ip }}:389:389
+      - {{ samba_server_ip }}:389:389/udp
+      - {{ samba_server_ip }}:445:445
+      - {{ samba_server_ip }}:464:464
+      - {{ samba_server_ip }}:464:464/udp
+      - {{ samba_server_ip }}:636:636
+      - {{ samba_server_ip }}:1024-1044:1024-1044
+      - {{ samba_server_ip }}:3268-3269:3268-3269
+    dns_search:
+      - {{ domain_name }}
+    dns:
+      - {{ samba_server_ip }}
+    extra_hosts:
+      - {{ samba_server_fqdn }}:{{ samba_server_ip }}
+      - {{ keycloak_server_fqdn }}:{{ keycloak_server_ip }}
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    privileged: true
+# ----------- samba end ----------- #

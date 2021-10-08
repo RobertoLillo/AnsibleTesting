@@ -1,5 +1,5 @@
 ---
-- name: Check Docker-Compose installation directory.
+- name: "Check Docker-Compose installation directory"
   stat:
     path: /usr/local/bin/docker-compose
   register: docker_compose_bin

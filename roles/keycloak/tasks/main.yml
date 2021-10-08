@@ -1,31 +1,31 @@
 ---
 - name: "Clone Keycloak theme repository"
   ansible.builtin.git:
-    repo: "{{ theme_repository }}"
-    dest: /opt/sistema-centralizado
+    repo: "{{ keycloak_theme_repository }}"
+    dest: "{{ files_path }}"
   tags:
     - keycloak
     - theme_update
 
-- name: "Copy docker-compose.yml to server"
-  copy:
-    src: docker-compose.yml
-    dest: /opt/sistema-centralizado/docker-compose.yml
+- name: "Copy docker-compose file to server"
+  template:
+    src: docker-compose.j2
+    dest: "{{ files_path  }}/docker-compose.yml"
     owner: root
     group: root
     mode: 0644
   tags:
     - keycloak
 
-- name: "Deploy containers with Docker-Compose"
+- name: "Deploy {{ keycloak_container_name }} & {{ postgres_container_name }} containers with Docker-Compose"
   shell:
-    cmd: "docker-compose -f /opt/sistema-centralizado/docker-compose.yml up -d"
+    cmd: "docker-compose -f {{ files_path }}/docker-compose.yml up -d"
   tags:
     - keycloak
 
 - name: "Wait for Keycloak to get ready"
   wait_for:
     host: "{{ keycloak_server_ip }}"
-    port: 443
+    port: "{{ keycloak_container_port }}"
   tags:
     - keycloak

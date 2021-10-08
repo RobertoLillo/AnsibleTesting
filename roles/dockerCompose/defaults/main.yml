@@ -1,3 +1,5 @@
 ---
-# --- Docker-Compose installation variables ---
+# defaults file for dockerCompose
+
+# Docker-Compose
 docker_compose_version: 1.29.2

@@ -1,0 +1,46 @@
+---
+version: '3'
+ 
+volumes:
+  postgres_data:
+      driver: local
+ 
+services:
+  postgres:
+      image: postgres:{{ postgres_version }}
+      container_name: {{ postgres_container_name }}
+      hostname: {{ postgres_container_hostname }}
+      restart: unless-stopped
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_DB: {{ postgres_database_name }}
+        POSTGRES_USER: {{ postgres_user }}
+        POSTGRES_PASSWORD: {{ postgres_password }}
+      ports:
+        - {{ postgres_container_port }}:5432
+  
+  keycloak:
+      image: quay.io/keycloak/keycloak:{{ keycloak_version }}
+      container_name: {{ keycloak_container_name }}
+      hostname: {{ keycloak_container_hostname }}
+      restart: unless-stopped
+      volumes:
+        - {{ files_path }}/sambaCert:/opt/jboss/keycloak/sambaCert
+        - {{ files_path }}/{{ keycloak_theme_name }}:/opt/jboss/keycloak/themes/{{ keycloak_theme_name }}
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: postgres
+        DB_SCHEMA: public
+        DB_DATABASE: {{ postgres_database_name }}
+        DB_USER: {{ postgres_user }}
+        DB_PASSWORD: {{ postgres_password }}
+        KEYCLOAK_USER: {{ keycloak_admin_user }}
+        KEYCLOAK_PASSWORD: {{ keycloak_admin_password }}
+      ports:
+        - {{ keycloak_container_port }}:8443
+      extra_hosts:
+        - {{ samba_server_fqdn }}:{{ samba_server_ip }}
+        - {{ keycloak_server_fqdn }}:{{ keycloak_server_ip }}
+      depends_on:
+        - postgres

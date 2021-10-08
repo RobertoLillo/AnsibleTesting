@@ -3,23 +3,33 @@
 enable_federation: true        # Turns ON or OFF the federation configuration on Keycloak
 enable_identity_provider: true # Turns ON or OFF the identity provider configuration on Keycloak
 
+# ----- Global -----
+# Server IP
+samba_server_ip: 10.0.2.4
+keycloak_server_ip: 10.0.2.5
 
-# --- Keycloak information ---
-keycloak_base_url: "https://keycloak.diinf.tk"
-keycloak_admin_user: "admin"
-keycloak_admin_pass: "Diinf1*"
+# Server FQDN
+samba_server_fqdn: samba.diinf.lan
+keycloak_server_fqdn: keycloak.diinf.tk
 
-# --- Keycloak master realm information ---
-keycloak_realm_data_file: "master_realm.json"
+# Files
+files_path: /opt/sistema-centralizado
 
-# --- New realm information ---
-realm_name: "DIINF"
-realm_data_file: "diinf_realm.json"
+# ----- Keycloak Service -----
+# Container configuration
+keycloak_container_name: keycloak-app
+keycloak_container_port: 443
 
-# --- New realm federation information ---
-federation_name: "Samba"
-federation_data_file: "samba_federation.json"
+# Keycloak configuration
+keycloak_admin_user: admin
+keycloak_admin_password: Diinf1*
 
-# --- New realm services configuration ---
-id_provider_name: "google"
-id_provider_data_file: "google_id_provider.json"
+# URL
+keycloak_base_url: "https://{{ keycloak_server_fqdn }}"
+
+# Realm
+keycloak_realm_name: DIINF
+
+# Theme
+keycloak_theme_name: DIINF
+keycloak_theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak

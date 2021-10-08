@@ -1,21 +1,21 @@
 ---
-- name: "Copy docker-compose.yml to server"
-  copy:
-    src: docker-compose.yml
-    dest: /opt/sistema-centralizado/docker-compose.yml
+- name: "Copy docker-compose file to server"
+  template:
+    src: docker-compose.j2
+    dest: "{{ files_path  }}/docker-compose.yml"
     owner: root
     group: root
     mode: 0644
   tags: 
     - samba
 
-- name: "Deploy container with Docker-Compose"
+- name: "Deploy {{container_name}} container with Docker-Compose"
   shell:
-    cmd: "docker-compose -f /opt/sistema-centralizado/docker-compose.yml up -d"
+    cmd: "docker-compose -f {{ files_path  }}/docker-compose.yml up -d"
   tags: 
     - samba
 
-- name: "Wait for Samba to open port 636"
+- name: "Wait for Samba Service to open port 636"
   wait_for:
     host: "{{ samba_server_ip }}"
     port: 636

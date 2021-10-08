@@ -6,7 +6,7 @@
     - federation
     - identity_provider
 
-- name: "Change localization and add {{ realm_name }} realm"
+- name: "Change localization and add {{ keycloak_realm_name }} realm"
   include_tasks: config_realm.yml
   tags:
     - keycloak_config
@@ -18,14 +18,14 @@
     - keycloak_config
     - federation
 
-- name: "Set up User Storage Federation on realm {{ realm_name }}"
+- name: "Set up User Storage Federation on realm {{ keycloak_realm_name }}"
   include_tasks: config_federation.yml
   when: enable_federation == true
   tags:
     - keycloak_config
     - federation
 
-- name: "Set up Identity Providers on realm {{ realm_name }}"
+- name: "Set up Identity Providers on realm {{ keycloak_realm_name }}"
   include_tasks: config_id_providers.yml
   when: enable_identity_provider == true
   tags:

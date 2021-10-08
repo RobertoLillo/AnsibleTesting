@@ -1,27 +1,78 @@
 ---
-# --- Toggles ---
+# ----- Toggles -----
 enable_federation: true         # Turns ON or OFF the federation configuration on Keycloak
 enable_identity_provider: true  # Turns ON or OFF the identity provider configuration on Keycloak
 
 
-# --- Variables used in common role ---
-# Docker installation
+
+# ----- Global -----
+# Server IP
+samba_server_ip: 10.0.2.4
+keycloak_server_ip: 10.0.2.5
+
+# Server FQDN
+samba_server_fqdn: samba.diinf.lan
+keycloak_server_fqdn: keycloak.diinf.tk
+
+# Files
+files_path: /opt/sistema-centralizado
+
+
+
+# ----- Package Installation -----
+# Docker
 docker_ce_version: 5:20.10.7~3-0~ubuntu-focal
 docker_ce_cli_version: 5:20.10.7~3-0~ubuntu-focal
 containerd_io_version: 1.4.9-1
 
-# Docker-Compose installation
+# Docker-Compose
 docker_compose_version: 1.29.2
 
 
-# --- Variables used in samba, keycloak and keycloakConfig roles ---
-# Server IPs
-samba_server_ip: 10.0.2.4
-keycloak_server_ip: 10.0.2.5
 
-# Server FQDNs
-samba_server_fqdn: samba.diinf.lan
-keycloak_server_fqdn: keycloak.diinf.tk
+# ----- Samba Service -----
+# Container configuration
+samba_container_name: samba-ad
+samba_container_hostname: samba
 
-# DIINF Theme repository
-theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak
+# Samba Active Directory configuration
+samba_domain_name: DIINF.LAN      # Always Uppercase
+samba_domain_password: Diinf1*    # At least one Uppercase, number & symbol
+samba_dns_forwarder: 8.8.8.8
+
+
+
+# ----- Keycloak Service -----
+# Container configuration
+keycloak_version: 14.0.0
+keycloak_container_name: keycloak-app
+keycloak_container_hostname: keycloak
+keycloak_container_port: 443
+
+# Keycloak configuration
+keycloak_admin_user: admin
+keycloak_admin_password: Diinf1*
+
+# URL
+keycloak_base_url: "https://{{ keycloak_server_fqdn }}"
+
+# Realm
+keycloak_realm_name: DIINF
+
+# Theme
+keycloak_theme_name: DIINF
+keycloak_theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak
+
+
+
+# ----- PostgreSQL Service -----
+# Container configuration
+postgres_version: 13.3
+postgres_container_name: postgres-db
+postgres_container_hostname: postgres
+postgres_container_port: 5432
+
+# PostgreSQL
+postgres_database_name: keycloak
+postgres_user: keycloak
+postgres_password: keycloakPassword

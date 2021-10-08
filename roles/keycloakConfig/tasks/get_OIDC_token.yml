@@ -6,7 +6,7 @@
     body_format: form-urlencoded
     body:
       username: "{{ keycloak_admin_user }}"
-      password: "{{ keycloak_admin_pass }}"
+      password: "{{ keycloak_admin_password }}"
       grant_type: "password"
       client_id: "admin-cli"
     validate_certs: no

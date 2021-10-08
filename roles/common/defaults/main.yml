@@ -1,2 +1,5 @@
 ---
 # defaults file for common
+
+# Files
+files_path: /opt/sistema-centralizado

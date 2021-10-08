@@ -1,9 +1,41 @@
 ---
-# --- Keycloak server IP ---
+# defaults file for keycloak
+
+# ----- Global -----
+# Server IP
+samba_server_ip: 10.0.2.4
 keycloak_server_ip: 10.0.2.5
 
-# --- Keycloak FQDN ---
+# Server FQDN
+samba_server_fqdn: samba.diinf.lan
 keycloak_server_fqdn: keycloak.diinf.tk
 
-# --- DIINF Theme repository ---
-theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak
+# Files
+files_path: /opt/sistema-centralizado
+
+# ----- Keycloak Service -----
+# Container configuration
+keycloak_version: 14.0.0
+keycloak_container_name: keycloak-app
+keycloak_container_hostname: keycloak
+keycloak_container_port: 443
+
+# Keycloak configuration
+keycloak_admin_user: admin
+keycloak_admin_password: Diinf1*
+
+# Theme
+keycloak_theme_name: DIINF
+keycloak_theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak
+
+# ----- PostgreSQL Service -----
+# Container configuration
+postgres_version: 13.3
+postgres_container_name: postgres-db
+postgres_container_hostname: postgres
+postgres_container_port: 5432
+
+# PostgreSQL
+postgres_database_name: keycloak
+postgres_user: keycloak
+postgres_password: keycloakPassword

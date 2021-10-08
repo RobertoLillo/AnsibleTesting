@@ -5,11 +5,11 @@
   tags:
     - common
     
-- name: "Add IP address of every hosts to all hosts"
+- name: "Add the IP address of every hosts to all hosts"
   lineinfile:
     dest: /etc/hosts
-    regexp: '.*{{ item }}$'
-    line: "{{ hostvars[item].ansible_host }} {{item}}"
+    regexp: ".*{{ item }}$"
+    line: "{{ hostvars[item].ansible_host }} {{ item }}"
     state: present
   when: hostvars[item].ansible_host is defined
   with_items: "{{ groups.all }}"
@@ -19,7 +19,7 @@
 
 - name: "Create installation directory"
   file:
-    path: /opt/sistema-centralizado
+    path: "{{ files_path }}"
     state: directory
   tags:
     - common

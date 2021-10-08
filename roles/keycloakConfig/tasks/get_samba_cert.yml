@@ -1,7 +1,7 @@
 ---
 - name: "Check if Samba SSL Certificate is already added to cacerts"
   shell:
-    cmd: "docker exec -u 0 keycloak_app keytool -list -cacerts -storepass changeit | grep 'samba.diinf.lan'"
+    cmd: "docker exec -u 0 {{ keycloak_container_name }} keytool -list -cacerts -storepass changeit | grep {{ samba_server_fqdn }}"
   register: cacerts_check
   failed_when: cacerts_check.rc == 2
   changed_when: false
@@ -11,7 +11,7 @@
 
 - name: "Copy Samba SSL certificate"
   shell:
-    cmd: "openssl s_client -connect {{ samba_server_ip }}:636 </dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /opt/sistema-centralizado/sambaCert/sambaCert.pem"
+    cmd: "openssl s_client -connect {{ samba_server_fqdn }}:636 </dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > {{ files_path }}/sambaCert/sambaCert.pem"
   when: cacerts_check.rc == 1
   tags:
     - keycloak_config
@@ -19,7 +19,7 @@
 
 - name: "Add Samba SSL certificate to Java cacerts"
   shell:
-    cmd: "docker exec -u 0 keycloak_app keytool -import -trustcacerts -file /opt/jboss/keycloak/sambaCert/sambaCert.pem -alias samba.diinf.lan -cacerts -storepass changeit -noprompt"
+    cmd: "docker exec -u 0 {{ keycloak_container_name }} keytool -import -trustcacerts -file /opt/jboss/keycloak/sambaCert/sambaCert.pem -alias {{ samba_server_fqdn }} -cacerts -storepass changeit -noprompt"
   when: cacerts_check.rc == 1
   tags:
     - keycloak_config
