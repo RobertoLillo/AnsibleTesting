@@ -1,7 +1,7 @@
 ---
 - name: "Find out if {{ id_provider_name }} Provider exists"
   uri:
-    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ realm_name }}/identity-provider/instances/{{ id_provider_name }}"
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ keycloak_realm_name }}/identity-provider/instances/{{ id_provider_name }}"
     method: GET
     status_code:
      - 200
@@ -17,9 +17,10 @@
 
 - name: "Add {{ id_provider_name }} as Identity Provider"
   uri:
-    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ realm_name }}/identity-provider/instances"
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ keycloak_realm_name }}/identity-provider/instances"
     method: POST
-    src: "{{ id_provider_data_file }}"
+    body_format: json
+    body: "{{ id_provider_json }}"
     remote_src: "no"
     status_code:
      - 201

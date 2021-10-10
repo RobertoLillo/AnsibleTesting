@@ -1,7 +1,7 @@
 ---
 - name: "Find out if {{ federation_name }} Federation exists"
   uri:
-    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ realm_name }}/components/{{ federation_name }}"
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ keycloak_realm_name }}/components/{{ federation_id }}"
     method: GET
     status_code:
      - 200
@@ -17,9 +17,10 @@
 
 - name: "Add {{ federation_name }} as User Federation Provider"
   uri:
-    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ realm_name }}/components"
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ keycloak_realm_name }}/components"
     method: POST
-    src: "{{ federation_data_file }}"
+    body_format: json
+    body: "{{ federation_json }}"
     remote_src: "no"
     status_code:
      - 201

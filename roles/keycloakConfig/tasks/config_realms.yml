@@ -3,7 +3,8 @@
   uri:
     url: "{{ keycloak_base_url }}/auth/admin/realms/master"
     method: PUT
-    src: "{{ keycloak_realm_data_file }}"
+    body_format: json
+    body: "{{ master_realm_json }}"
     remote_src: "no"
     status_code:
      - 204
@@ -16,9 +17,9 @@
   tags:
     - keycloak_config
 
-- name: "Find out if Realm {{ realm_name }} exists"
+- name: "Find out if Realm {{ keycloak_realm_name }} exists"
   uri:
-    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ realm_name }}"
+    url: "{{ keycloak_base_url }}/auth/admin/realms/{{ keycloak_realm_name }}"
     method: GET
     status_code:
      - 200
@@ -31,11 +32,12 @@
   tags:
     - keycloak_config
 
-- name: "Create Realm {{ realm_name }}"
+- name: "Create Realm {{ keycloak_realm_name }}"
   uri:
     url: "{{ keycloak_base_url }}/auth/admin/realms"
     method: POST
-    src: "{{ realm_data_file }}"
+    body_format: json
+    body: "{{ new_realm_json }}"
     remote_src: "no"
     status_code:
      - 201

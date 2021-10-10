@@ -7,7 +7,7 @@
     - identity_provider
 
 - name: "Change localization and add {{ keycloak_realm_name }} realm"
-  include_tasks: config_realm.yml
+  include_tasks: config_realms.yml
   tags:
     - keycloak_config
 

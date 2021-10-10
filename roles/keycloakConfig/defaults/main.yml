@@ -1,7 +1,11 @@
 ---
-# --- Toggles ---
-enable_federation: true        # Turns ON or OFF the federation configuration on Keycloak
-enable_identity_provider: true # Turns ON or OFF the identity provider configuration on Keycloak
+# defaults file for keycloakConfig
+
+# ----- Toggles -----
+enable_federation: true             # Turns ON or OFF the federation configuration on Keycloak
+enable_identity_provider: false     # Turns ON or OFF the identity provider configuration on Keycloak
+
+
 
 # ----- Global -----
 # Server IP
@@ -15,20 +19,37 @@ keycloak_server_fqdn: keycloak.diinf.tk
 # Files
 files_path: /opt/sistema-centralizado
 
+
+
+# ----- Samba Service -----
+# Samba Active Directory configuration
+samba_domain_password: Diinf1*    # At least one Uppercase, number & symbol
+samba_users_DN: CN=Users,DC=diinf,DC=lan
+samba_bind_DN: CN=Administrator,CN=Users,DC=diinf,DC=lan
+
+
+
 # ----- Keycloak Service -----
 # Container configuration
 keycloak_container_name: keycloak-app
-keycloak_container_port: 443
 
 # Keycloak configuration
 keycloak_admin_user: admin
 keycloak_admin_password: Diinf1*
-
-# URL
 keycloak_base_url: "https://{{ keycloak_server_fqdn }}"
 
-# Realm
+# New Realm
 keycloak_realm_name: DIINF
+
+# Federation
+federation_id: Samba
+federation_name: Samba-AD
+federation_edit_mode: WRITABLE
+
+# Identity Provider
+id_provider_name: google    # Lowercase
+id_provider_client_id: clientID
+id_provider_client_secret: clientSecret
 
 # Theme
 keycloak_theme_name: DIINF

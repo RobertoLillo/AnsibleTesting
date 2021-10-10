@@ -9,7 +9,7 @@
   tags: 
     - samba
 
-- name: "Deploy {{container_name}} container with Docker-Compose"
+- name: "Deploy {{ samba_container_name }} container with Docker-Compose"
   shell:
     cmd: "docker-compose -f {{ files_path  }}/docker-compose.yml up -d"
   tags: 

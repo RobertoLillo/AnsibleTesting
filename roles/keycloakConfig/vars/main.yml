@@ -1,2 +1,8 @@
 ---
 # vars file for keycloakConfig
+
+# Load jinja2 JSON template into variable
+master_realm_json: "{{ lookup('template', 'master_realm.j2') }}"
+new_realm_json: "{{ lookup('template', 'new_realm.j2') }}"
+federation_json: "{{ lookup('template', 'federation.j2') }}"
+id_provider_json: "{{ lookup('template', 'id_provider.j2') }}"

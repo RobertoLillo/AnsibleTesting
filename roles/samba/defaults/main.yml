@@ -1,7 +1,7 @@
 ---
 # defaults file for samba
 
-# --- Global ---
+# ----- Global -----
 # Server IP
 samba_server_ip: 10.0.2.4
 keycloak_server_ip: 10.0.2.5
@@ -13,12 +13,14 @@ keycloak_server_fqdn: keycloak.diinf.tk
 # Files
 files_path: /opt/sistema-centralizado
 
-# --- Samba ---
+
+
+# ----- Samba Service -----
 # Container configuration
-container_name: samba-ad
-container_hostname: samba
+samba_container_name: samba-ad
+samba_container_hostname: samba
 
 # Samba Active Directory configuration
-domain_name: DIINF.LAN      # Always Uppercase
-domain_password: Diinf1*    # One Uppercase, number & symbol
-dns_forwarder: 8.8.8.8
+samba_domain_name: DIINF.LAN      # Always Uppercase
+samba_domain_password: Diinf1*    # At least one Uppercase, number & symbol
+samba_dns_forwarder: 8.8.8.8

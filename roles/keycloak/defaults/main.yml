@@ -13,6 +13,8 @@ keycloak_server_fqdn: keycloak.diinf.tk
 # Files
 files_path: /opt/sistema-centralizado
 
+
+
 # ----- Keycloak Service -----
 # Container configuration
 keycloak_version: 14.0.0
@@ -27,6 +29,8 @@ keycloak_admin_password: Diinf1*
 # Theme
 keycloak_theme_name: DIINF
 keycloak_theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak
+
+
 
 # ----- PostgreSQL Service -----
 # Container configuration

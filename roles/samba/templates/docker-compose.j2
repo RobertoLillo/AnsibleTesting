@@ -5,17 +5,17 @@ services:
 # ----------- samba begin ----------- #
   samba:
     image: nowsci/samba-domain
-    container_name: {{ container_name }}
-    hostname: {{ container_hostname }}
+    container_name: {{ samba_container_name }}
+    hostname: {{ samba_container_hostname }}
     restart: unless-stopped
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /data/docker/containers/samba/data/:/var/lib/samba
       - /data/docker/containers/samba/config/samba:/etc/samba/external
     environment:
-      - DOMAIN={{ domain_name }}
-      - DOMAINPASS={{ domain_password }}
-      - DNSFORWARDER={{ dns_forwarder }}
+      - DOMAIN={{ samba_domain_name }}
+      - DOMAINPASS={{ samba_domain_password }}
+      - DNSFORWARDER={{ samba_dns_forwarder }}
       - HOSTIP={{ samba_server_ip }}
     ports:
       - {{ samba_server_ip }}:53:53
@@ -34,7 +34,7 @@ services:
       - {{ samba_server_ip }}:1024-1044:1024-1044
       - {{ samba_server_ip }}:3268-3269:3268-3269
     dns_search:
-      - {{ domain_name }}
+      - {{ samba_domain_name }}
     dns:
       - {{ samba_server_ip }}
     extra_hosts:

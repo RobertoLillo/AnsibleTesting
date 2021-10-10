@@ -1,9 +1,9 @@
 {
-    "id": "Samba",
-    "name": "samba.diinf.lan",
+    "id": "{{ federation_id }}",
+    "name": "{{ federation_name }}",
     "providerId": "ldap",
     "providerType": "org.keycloak.storage.UserStorageProvider",
-    "parentId": "DIINF",
+    "parentId": "{{ keycloak_realm_name }}",
     "config": {
         "enabled": [
             "true"
@@ -28,7 +28,7 @@
             "1000"
         ],
         "editMode": [
-            "WRITABLE"
+            "{{ federation_edit_mode }}"
         ],
         "importEnabled": [
             "true"
@@ -53,20 +53,20 @@
             "person, organizationalPerson, user"
         ],
         "connectionUrl": [
-            "ldaps://samba.diinf.lan"
+            "ldaps://{{ samba_server_fqdn }}"
         ],
         "usersDn": [
-            "CN=Users,DC=diinf,DC=lan"
+            "{{ samba_users_DN }}"
         ],
         "authType": [
             "simple"
         ],
         "startTls": [],
         "bindDn": [
-            "CN=Administrator,CN=Users,DC=diinf,DC=lan"
+            "{{ samba_bind_DN }}"
         ],
         "bindCredential": [
-            "Diinf1*"
+            "{{ samba_domain_password }}"
         ],
         "customUserSearchFilter": [],
         "searchScope": [
