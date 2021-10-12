@@ -191,6 +191,14 @@ Además de los anteriores, se definieron otros *tags* principalmente para hacer 
  - **federation**: ejecuta las tareas del rol ***KeycloakConfig*** relacionadas a la federación de usuarios.
  - **identity_provider**: ejecuta las tareas del rol ***KeycloakConfig*** relacionadas a los proveedores de identidad.
 
+## Tema DIINF para la interfaz de usuarios
+
+Junto al *playbook* se desarrolló una versión de la consola de usuarios con traducciones al español, colores institucionales y branding del Departamento de Ingeniería Informática, este tema se encuentra en el siguiente repositorio:
+
+ - [Tema-DIINF-Keycloak](https://github.com/RobertoLillo/Tema-DIINF-Keycloak)
+
+Este tema se encuentra incluido por defecto en el archivo **vars.yml** y también en los archivos **main.yml** de la carpeta **Defaults** de los roles **Keycloak** y **KeycloakConfig**.
+
 ## Documentación
 
 Durante el periodo de investigación e implementación de este proyecto se generaron variados documentos que comparan distintas funciones entre servicios y también explican como instalar manualmente cada uno de los *software*, estos documentos se encuentran en la carpeta ***Docs*** del repositorio.
