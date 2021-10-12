@@ -28,5 +28,7 @@ En esta carpeta es posible encontrar todos los documentos generados durante el p
  - [Configuración GCP: Gluu Docker, Passport.js y OpenID Connect](https://docs.google.com/document/d/1oIf8F35AUFxg_Sd3nV2VJ5VYRMtsW_oQVdtgFIy_lTM/edit?usp=sharing)
  
  - [Levantar VM GCP con FQDN](https://docs.google.com/document/d/1-I8eaUh2ZAEu0C7dULnsKEN-bbE5LeYZq5KC0WRQ-Ys/edit?usp=sharing)
+
+ - [Obtención de credenciales OAuth en Google Cloud Platform](https://docs.google.com/document/d/12Do9Imo9vBl-4Mf3kXUOwNB4-LgH9df38dJZBiHdTzY/edit?usp=sharing)
  
  - [Levantamiento de laboratorio completo](https://docs.google.com/document/d/1mcvTqlYZ10cLTrtvlxCse3KeGCr8f3kYazTAYSyVYyA/edit?usp=sharing)
