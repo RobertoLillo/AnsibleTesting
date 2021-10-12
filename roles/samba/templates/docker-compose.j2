@@ -13,7 +13,7 @@ services:
       - /data/docker/containers/samba/data/:/var/lib/samba
       - /data/docker/containers/samba/config/samba:/etc/samba/external
     environment:
-      - DOMAIN={{ samba_domain_name }}
+      - DOMAIN={{ samba_domain_name }}.{{ samba_domain_suffix }}
       - DOMAINPASS={{ samba_domain_password }}
       - DNSFORWARDER={{ samba_dns_forwarder }}
       - HOSTIP={{ samba_server_ip }}
@@ -34,7 +34,7 @@ services:
       - {{ samba_server_ip }}:1024-1044:1024-1044
       - {{ samba_server_ip }}:3268-3269:3268-3269
     dns_search:
-      - {{ samba_domain_name }}
+      - {{ samba_domain_name }}.{{ samba_domain_suffix }}
     dns:
       - {{ samba_server_ip }}
     extra_hosts:

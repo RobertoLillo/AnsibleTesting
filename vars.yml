@@ -36,11 +36,12 @@ samba_container_name: samba-ad
 samba_container_hostname: samba
 
 # Samba Active Directory configuration
-samba_domain_name: DIINF.LAN    # Always Uppercase
-samba_domain_password: Diinf1*  # At least one Uppercase, number & symbol
+samba_domain_name: DIINF        # Always uppercase
+samba_domain_suffix: LAN        # Always uppercase
+samba_domain_password: Diinf1*  # At least one uppercase, number & symbol
 samba_dns_forwarder: 8.8.8.8
-samba_users_DN: CN=Users,DC=diinf,DC=lan
-samba_bind_DN: CN=Administrator,CN=Users,DC=diinf,DC=lan
+samba_users_DN: CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}
+samba_bind_DN: CN=Administrator,CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}
 
 
 
@@ -60,17 +61,17 @@ keycloak_base_url: "https://{{ keycloak_server_fqdn }}"
 keycloak_realm_name: DIINF
 
 # Federation
-federation_id: Samba
-federation_name: Samba-AD
-federation_edit_mode: WRITABLE
+federation_id: Samba				# ID
+federation_name: Samba-AD			# Display name
+federation_edit_mode: WRITABLE		# Options: READ_ONLY, WRITABLE & UNSYNCED
 
 # Identity Provider
-id_provider_name: google    # Lowercase
-id_provider_client_id: clientId
-id_provider_client_secret: clientSecret
+id_provider_name: google					# Lowercase
+id_provider_client_id: clientId				# Obtained through Google Cloud Platform
+id_provider_client_secret: clientSecret		# Obtained through Google Cloud Platform
 
 # Theme
-keycloak_theme_name: DIINF
+keycloak_theme_name: DIINF		# Name of the folder on the repository
 keycloak_theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak
 
 

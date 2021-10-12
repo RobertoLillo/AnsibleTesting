@@ -13,6 +13,7 @@ Para la ejecución de este *playbook* se necesita lo siguiente:
  - **2 máquinas Ubuntu 20.04 LTS Server** (a ser configuradas por Ansible)
  - **1 máquina con Ansible 2.9.x** (que ejecuta el *playbook*)
  - **Conexión SSH a las 2 máquinas a configurar**
+ - **Cuenta de Google Cloud Platform** (preferiblemente cuenta USACH)
  - **Conexión a internet en las 3 máquinas**
 
 ## Configuración
@@ -40,35 +41,104 @@ El archivo de hosts por defecto es el siguiente:
 
 ### > Vars
 
-En **vars.yml** se pueden encontrar multiples variables que afectan la ejecución del *playbook* y modifican valores de los servicios desplegados. 
+En **vars.yml** se pueden encontrar multiples variables que afectan la ejecución del *playbook* y modifican valores de los servicios desplegados. Los valores que se encuentran por defecto en este archivo están también repartidos en el archivo **main.yml** dentro de la carpeta **Defaults** de cada rol.
 
-Primero en la sección ***Toggles*** se encuentran las variables que determinan si las tareas relacionadas a la federación de usuarios o proveedores de identidad serán ejecutadas, esto implica si estas configuraciones serán o no aplicadas al servidor de Keycloak. Esto permite desplegar el servidor de Keycloak limpio de configuraciones o sólo con la configuración que se desea probar, en el caso de que sea necesario deshabilitar la federación permite desplegar Keycloak sin la necesidad de tener previamente un servidor de Samba AD.
+En la sección ***Toggles*** se encuentran las variables que determinan si las tareas relacionadas a la federación de usuarios o proveedores de identidad serán ejecutadas, esto implica si estas configuraciones serán o no aplicadas al servidor de Keycloak. Esto permite desplegar el servidor de Keycloak limpio de configuraciones o sólo con la configuración que se desea probar, en el caso de que sea necesario deshabilitar la federación permite desplegar Keycloak sin la necesidad de tener previamente un servidor de Samba AD.
 
-    # --- Toggles ---
+    # ----- Toggles -----
     enable_federation: true	        # Turns ON or OFF the federation configuration on Keycloak
     enable_identity_provider: true	# Turns ON or OFF the identity provider configuration on Keycloak
 
-La segunda sección corresponde a las variables utilizadas en el rol ***Common***, aquí es necesario establecer las versiones de Docker y Docker-Compose a ser instaladas en las máquinas, Docker particularmente requiere determinar la versión de 3 paquetes. Es posible utilizar el símbolo **`*`** para instalar la última versión disponible.
+\
+La siguiente sección corresponde a las variables que se utilizan de manera **Global** en el *playbook*, aquí es necesario ingresar los mismos valores previamente guardados en el archivo **hosts.yml**. También es posible determinar el directorio que será utilizado para guardar archivos de instalación en cada máquina.
 
-    # --- Variables used in common role ---
-    # Docker installation
-    docker_ce_version: 5:20.10.7~3-0~ubuntu-focal
-    docker_ce_cli_version: 5:20.10.7~3-0~ubuntu-focal
-    containerd_io_version: 1.4.9-1
-    
-    # Docker-Compose installation
-    docker_compose_version: 1.29.2
+	# ----- Global -----
+	# Server IP
+	samba_server_ip: 10.0.2.4
+	keycloak_server_ip: 10.0.2.5
 
-Finalmente, la última sección contiene las variables que son utilizadas en los roles **Samba**, **Keycloak** y **KeycloakConfig**. Aquí es necesario establecer los valores ingresados previamente en el archivo **hosts.yml**.
+	# Server FQDN
+	samba_server_fqdn: samba.diinf.lan
+	keycloak_server_fqdn: keycloak.diinf.tk
 
-    # --- Variables used in samba, keycloak and keycloakConfig roles ---
-    # Server IPs
-    samba_server_ip: 10.0.2.4
-    keycloak_server_ip: 10.0.2.5
-    
-    # Server FQDNs
-    samba_server_fqdn: samba.diinf.lan
-    keycloak_server_fqdn: keycloak.diinf.tk
+	# Files
+	files_path: /opt/sistema-centralizado
+
+\
+En ***Package Installation*** se establecen las versiones de Docker y Docker-Compose a ser instaladas en las máquinas, Docker particularmente requiere determinar la versión de 3 paquetes. Es posible utilizar el símbolo **`*`** para instalar la última versión disponible.
+
+    # ----- Package Installation -----
+	# Docker
+	docker_ce_version: 5:20.10.7~3-0~ubuntu-focal
+	docker_ce_cli_version: 5:20.10.7~3-0~ubuntu-focal
+	containerd_io_version: 1.4.9-1
+
+	# Docker-Compose
+	docker_compose_version: 1.29.2
+
+\
+***Samba Service*** incluye las variables para el despliegue del contenedor de Samba AD y principalmente las necesarias para el funcionamiento del servicio. **`samba_domain_name`**, **`samba_domain_suffix`** y **`samba_domain_password`** tienen indicaciones especiales de cómo deben ser ingresadas.
+
+	# ----- Samba Service -----
+	# Container configuration
+	samba_container_name: samba-ad
+	samba_container_hostname: samba
+
+	# Samba Active Directory configuration
+	samba_domain_name: DIINF  		# Always uppercase
+	samba_domain_suffix: LAN  		# Always uppercase
+	samba_domain_password: Diinf1*  # At least one uppercase, number & symbol
+	samba_dns_forwarder: 8.8.8.8
+	samba_users_DN: CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}
+	samba_bind_DN: CN=Administrator,CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}
+
+\
+La sección de ***Keycloak Service*** incluye una gran cantidad de variables al estar asociada tanto al rol de instalación como al de configuración. Algunas variables tienen indicaciones específicas y opciones posibles, es importante en esta sección especificar los valores de **`id_provider_client_id`** y **`id_provider_client_secret`** si es que se activa el *toggle* para configurar el proveedor de identidad, la explicación de cómo obtener estas credenciales se encuentra en el documento [Obtención de credenciales OAuth en Google Cloud Platform](https://github.com/RobertoLillo/Sistema-Centralizado/blob/main/docs/Obtenci%C3%B3n%20de%20credenciales%20OAuth%20en%20Google%20Cloud%20Platform.pdf) dentro de la carpeta ***Docs*** de este repositorio.
+
+	# ----- Keycloak Service -----
+	# Container configuration
+	keycloak_version: 14.0.0
+	keycloak_container_name: keycloak-app
+	keycloak_container_hostname: keycloak
+	keycloak_container_port: 443
+
+	# Keycloak configuration
+	keycloak_admin_user: admin
+	keycloak_admin_password: Diinf1*
+	keycloak_base_url: "https://{{  keycloak_server_fqdn  }}"
+
+	# New Realm
+	keycloak_realm_name: DIINF
+
+	# Federation
+	federation_id: Samba				# ID
+	federation_name: Samba-AD			# Display name
+	federation_edit_mode: WRITABLE		# Options: READ_ONLY, WRITABLE & UNSYNCED
+
+	# Identity Provider
+	id_provider_name: google					# Lowercase
+	id_provider_client_id: clientId				# Obtained through Google Cloud Platform
+	id_provider_client_secret: clientSecret		# Obtained through Google Cloud Platform
+  
+	# Theme
+	keycloak_theme_name: DIINF		# Name of the folder on the repository
+	keycloak_theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak
+
+\
+Finalmente, la sección de ***PostgreSQL Service*** contiene variables necesarias para configurar la base de datos **postgres** que es desplegada junto al servidor de Keycloak.
+
+	# ----- PostgreSQL Service -----
+	# Container configuration
+	postgres_version: 13.3
+	postgres_container_name: postgres-db
+	postgres_container_hostname: postgres
+	postgres_container_port: 5432
+
+	# PostgreSQL
+	postgres_database_name: keycloak
+	postgres_user: keycloak
+	postgres_password: keycloakPassword
+
 
 ### > Configuración TLS (SSL)
 
@@ -108,7 +178,7 @@ Lista de *tags* definidos:
 
  - **host_update**: ejecuta una de las tareas del rol ***Common***. Actualiza las IP y FQDN del archivo *hosts*, util si es que se hicieron cambios en las direcciones de las máquinas.
 
- - **theme_update**: ejecuta una de las tareas del rol ***Keycloak***. Descarga la última versión del tema de la interfaz de usuarios desde el repositorio [Tema-DIINF-Keycloak](https://github.com/RobertoLillo/Tema-DIINF-Keycloak), util si es que se hicieron cambios en la interfaz.
+ - **theme_update**: ejecuta una de las tareas del rol ***Keycloak***. Descarga la última versión del tema especificado en el archivo de variables, util si es que se hicieron cambios en la interfaz.
 
 Además de los anteriores, se definieron otros *tags* principalmente para hacer *testing* a etapas específicas del *playbook*, estas pueden ser utilizadas pero no aseguran el correcto funcionamiento del servicio final al no estar diseñadas para levantar el servicio completo.
 

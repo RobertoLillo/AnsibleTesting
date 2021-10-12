@@ -21,6 +21,7 @@ samba_container_name: samba-ad
 samba_container_hostname: samba
 
 # Samba Active Directory configuration
-samba_domain_name: DIINF.LAN      # Always Uppercase
-samba_domain_password: Diinf1*    # At least one Uppercase, number & symbol
+samba_domain_name: DIINF        # Always uppercase
+samba_domain_suffix: LAN        # Always uppercase
+samba_domain_password: Diinf1*  # At least one uppercase, number & symbol
 samba_dns_forwarder: 8.8.8.8

@@ -23,9 +23,12 @@ files_path: /opt/sistema-centralizado
 
 # ----- Samba Service -----
 # Samba Active Directory configuration
-samba_domain_password: Diinf1*    # At least one Uppercase, number & symbol
-samba_users_DN: CN=Users,DC=diinf,DC=lan
-samba_bind_DN: CN=Administrator,CN=Users,DC=diinf,DC=lan
+samba_domain_name: DIINF        # Always uppercase
+samba_domain_suffix: LAN        # Always uppercase
+samba_domain_password: Diinf1*  # At least one uppercase, number & symbol
+samba_dns_forwarder: 8.8.8.8
+samba_users_DN: CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}
+samba_bind_DN: CN=Administrator,CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}
 
 
 
