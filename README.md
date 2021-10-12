@@ -87,7 +87,7 @@ En ***Package Installation*** se establecen las versiones de Docker y Docker-Com
 	# Samba Active Directory configuration
 	samba_domain_name: DIINF  		# Always uppercase
 	samba_domain_suffix: LAN  		# Always uppercase
-	samba_domain_password: Diinf1*  # At least one uppercase, number & symbol
+	samba_domain_password: Diinf1*  	# At least one uppercase, number & symbol
 	samba_dns_forwarder: 8.8.8.8
 	samba_users_DN: CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}
 	samba_bind_DN: CN=Administrator,CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}
@@ -111,17 +111,17 @@ La sección de ***Keycloak Service*** incluye una gran cantidad de variables al 
 	keycloak_realm_name: DIINF
 
 	# Federation
-	federation_id: Samba				# ID
-	federation_name: Samba-AD			# Display name
+	federation_id: Samba			# ID
+	federation_name: Samba-AD		# Display name
 	federation_edit_mode: WRITABLE		# Options: READ_ONLY, WRITABLE & UNSYNCED
 
 	# Identity Provider
-	id_provider_name: google					# Lowercase
-	id_provider_client_id: clientId				# Obtained through Google Cloud Platform
+	id_provider_name: google			# Lowercase
+	id_provider_client_id: clientId			# Obtained through Google Cloud Platform
 	id_provider_client_secret: clientSecret		# Obtained through Google Cloud Platform
   
 	# Theme
-	keycloak_theme_name: DIINF		# Name of the folder on the repository
+	keycloak_theme_name: DIINF	# Name of the folder on the repository
 	keycloak_theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak
 
 \
