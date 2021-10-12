@@ -1,2 +1,2 @@
 roles/keycloak/files/certs/tls.key
-roles/keycloak/files/certs/tls.pem
+roles/keycloak/files/certs/tls.crt

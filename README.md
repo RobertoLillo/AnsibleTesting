@@ -17,9 +17,9 @@ Para la ejecución de este *playbook* se necesita lo siguiente:
 
 ## Configuración
 
-El despliegue del servicio se puede configurar mediante distintos archivos que se encuentran en el repositorio, principalmente mediante **hosts.yml** y **vars.yml** ubicados en la raíz del repositorio.
+El despliegue del servicio se puede configurar mediante distintos archivos que se encuentran en el repositorio, principalmente mediante **hosts.yml** y **vars.yml** ubicados en la raíz del repositorio, también es posible configurar el uso de certificados TLS correctamente firmados.
 
-### Hosts
+### > Hosts
 
 En el archivo **hosts.yml** se encuentran las direcciones de las máquinas en las que se ejecuta el *playbook*. Las máquinas están divididas en los grupos **`directoryServer`** y **`authServer`**, en cada uno de estos es necesario ingresar el **FQDN** del servidor como también su **dirección IP**.
 
@@ -38,7 +38,7 @@ El archivo de hosts por defecto es el siguiente:
             keycloak.diinf.tk:        # FQDN
               ansible_host: 10.0.2.5  # Server IP
 
-### Vars
+### > Vars
 
 En **vars.yml** se pueden encontrar multiples variables que afectan la ejecución del *playbook* y modifican valores de los servicios desplegados. 
 
@@ -70,6 +70,20 @@ Finalmente, la última sección contiene las variables que son utilizadas en los
     samba_server_fqdn: samba.diinf.lan
     keycloak_server_fqdn: keycloak.diinf.tk
 
+### > Configuración TLS (SSL)
+
+Este *playbook* permite desplegar el servicio de Keycloak con certificados autofirmados permitiendo así rápidamente generar un entorno de prueba, no obstante, es posible especificar un certificado y una llave privada para Keycloak, para esto se necesita proveer los siguientes dos archivos:
+
+-  **tls.crt**: el certificado
+
+-  **tls.key**: la llave privada
+
+La ubicación de estos archivos es en la ruta **`/Sistema-Centralizado/roles/keycloak/files/certs`** del repositorio y por seguridad ambos están incluidos en el ***gitignore***.
+
+La integración ocurre automáticamente, el servicio se desplegará con certificados autofirmados en el caso de que no se hayan incluido los archivos, por otro lado, cuando son incluidos son montados en la ruta **`/etc/x509/https`** del contenedor de Keycloak, detectados por el servicio y configurados automáticamente.
+
+Samba AD es desplegado con certificados autofirmados y no es configurable en esta versión del *playbook*.
+
 ## Ejecución
 
 Luego de realizar las configuraciones necesarias en **hosts.yml** y **vars.yml** es posible ejecutar el *playbook* mediante el comando:
@@ -78,7 +92,7 @@ Luego de realizar las configuraciones necesarias en **hosts.yml** y **vars.yml**
 
 La opción **-K** (o también **-\-ask-become-pass**) consultará por la contraseña de la cuenta utilizada para ingresar a la máquina, de esta forma se pueden ejecutar tareas que requieren **sudo**.
 
-### Tags
+### > Tags
 
 El comando anterior ejecuta el *playbook* en su totalidad, pero en casos que sea necesario ejecutar secciones específicas se puede utilizar una serie de ***Tags*** que determinan las tareas que serán realizadas. Esto se puede realizar mediante el siguiente comando:
 

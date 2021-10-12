@@ -1,16 +1,26 @@
 ---
 - name: "Clone Keycloak theme repository"
-  ansible.builtin.git:
+  git:
     repo: "{{ keycloak_theme_repository }}"
     dest: "{{ files_path }}"
   tags:
     - keycloak
     - theme_update
 
+- name: "Copy Keycloak SSL certificates folder to server"
+  copy:
+    src: certs
+    dest: "{{ files_path }}"
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - keycloak
+
 - name: "Copy docker-compose file to server"
   template:
     src: docker-compose.j2
-    dest: "{{ files_path  }}/docker-compose.yml"
+    dest: "{{ files_path }}/docker-compose.yml"
     owner: root
     group: root
     mode: 0644

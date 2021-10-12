@@ -26,6 +26,7 @@ services:
       hostname: {{ keycloak_container_hostname }}
       restart: unless-stopped
       volumes:
+        - {{ files_path }}/certs:/etc/x509/https
         - {{ files_path }}/sambaCert:/opt/jboss/keycloak/sambaCert
         - {{ files_path }}/{{ keycloak_theme_name }}:/opt/jboss/keycloak/themes/{{ keycloak_theme_name }}
       environment:
