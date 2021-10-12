@@ -193,7 +193,7 @@ Además de los anteriores, se definieron otros *tags* principalmente para hacer 
 
 ## Tema DIINF para la interfaz de usuarios
 
-Junto al *playbook* se desarrolló una versión de la consola de usuarios con traducciones al español, colores institucionales y branding del Departamento de Ingeniería Informática, este tema se encuentra en el siguiente repositorio:
+Junto al *playbook* se desarrolló una versión de la consola de usuarios con traducciones al español, colores institucionales y *branding* del Departamento de Ingeniería Informática, este tema se encuentra en el siguiente repositorio:
 
  - [Tema-DIINF-Keycloak](https://github.com/RobertoLillo/Tema-DIINF-Keycloak)
 
