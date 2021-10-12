@@ -32,3 +32,5 @@ En esta carpeta es posible encontrar todos los documentos generados durante el p
  - [Obtención de credenciales OAuth en Google Cloud Platform](https://docs.google.com/document/d/12Do9Imo9vBl-4Mf3kXUOwNB4-LgH9df38dJZBiHdTzY/edit?usp=sharing)
  
  - [Levantamiento de laboratorio completo](https://docs.google.com/document/d/1mcvTqlYZ10cLTrtvlxCse3KeGCr8f3kYazTAYSyVYyA/edit?usp=sharing)
+
+Finalmente, también se incluye la memoria escrita junto al desarrollo de este proyecto.
