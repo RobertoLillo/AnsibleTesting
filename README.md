@@ -201,4 +201,4 @@ Este tema se encuentra incluido por defecto en el archivo **vars.yml** y tambié
 
 ## Documentación
 
-Durante el periodo de investigación e implementación de este proyecto se generaron variados documentos que comparan distintas funciones entre servicios y también explican como instalar manualmente cada uno de los *software*, estos documentos se encuentran en la carpeta ***Docs*** del repositorio.
+Durante el periodo de investigación e implementación de este proyecto se generaron variados documentos que comparan distintas funciones entre servicios y también explican como instalar manualmente cada uno de los *software*, estos documentos se encuentran en la carpeta ***Docs*** del repositorio, también se incluye la memoria escrita junto al desarrollo del proyecto.
