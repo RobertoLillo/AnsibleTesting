@@ -13,7 +13,7 @@ Requisitos
 
 Variables
 --------------
-En el archivo **main.yml** en la carpeta **defaults** se encuentran dos sets de variables.
+En el archivo **main.yml** en la carpeta **defaults** se encuentran varios sets de variables.
 
 **Toggles** (determinan si se activan ciertos componentes de Keycloak)
 
