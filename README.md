@@ -43,7 +43,7 @@ El archivo de hosts por defecto es el siguiente:
 
 En **vars.yml** se pueden encontrar multiples variables que afectan la ejecución del *playbook* y modifican valores de los servicios desplegados. Los valores que se encuentran por defecto en este archivo están también repartidos en el archivo **main.yml** dentro de la carpeta **Defaults** de cada rol.
 
-En la sección ***Toggles*** se encuentran las variables que determinan si las tareas relacionadas a la federación de usuarios o proveedores de identidad serán ejecutadas, esto implica si estas configuraciones serán o no aplicadas al servidor de Keycloak. Esto permite desplegar el servidor de Keycloak limpio de configuraciones o sólo con la configuración que se desea probar, en el caso de que sea necesario deshabilitar la federación permite desplegar Keycloak sin la necesidad de tener previamente un servidor de Samba AD.
+En la sección ***Toggles*** se encuentran las variables que determinan si las tareas relacionadas a la federación de usuarios o proveedores de identidad serán ejecutadas, esto implica si estas configuraciones serán o no aplicadas al servidor de Keycloak. Esto permite desplegar el servidor de Keycloak limpio de configuraciones o sólo con la configuración que se desea probar, deshabilitar la federación permite desplegar Keycloak sin la necesidad de tener previamente un servidor de Samba AD.
 
     # ----- Toggles -----
     enable_federation: true	        # Turns ON or OFF the federation configuration on Keycloak
@@ -85,9 +85,9 @@ En ***Package Installation*** se establecen las versiones de Docker y Docker-Com
 	samba_container_hostname: samba
 
 	# Samba Active Directory configuration
-	samba_domain_name: DIINF  		# Always uppercase
-	samba_domain_suffix: LAN  		# Always uppercase
-	samba_domain_password: Diinf1*  	# At least one uppercase, number & symbol
+	samba_domain_name: DIINF  	# Always uppercase
+	samba_domain_suffix: LAN  	# Always uppercase
+	samba_domain_password: Diinf1*  # At least one uppercase, number & symbol
 	samba_dns_forwarder: 8.8.8.8
 	samba_users_DN: CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}
 	samba_bind_DN: CN=Administrator,CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}
@@ -111,14 +111,14 @@ La sección de ***Keycloak Service*** incluye una gran cantidad de variables al 
 	keycloak_realm_name: DIINF
 
 	# Federation
-	federation_id: Samba			# ID
-	federation_name: Samba-AD		# Display name
-	federation_edit_mode: WRITABLE		# Options: READ_ONLY, WRITABLE & UNSYNCED
+	federation_id: Samba		# ID
+	federation_name: Samba-AD	# Display name
+	federation_edit_mode: WRITABLE	# Options: READ_ONLY, WRITABLE & UNSYNCED
 
 	# Identity Provider
-	id_provider_name: google			# Lowercase
-	id_provider_client_id: clientId			# Obtained through Google Cloud Platform
-	id_provider_client_secret: clientSecret		# Obtained through Google Cloud Platform
+	id_provider_name: google		# Lowercase
+	id_provider_client_id: clientId		# Obtained through Google Cloud Platform
+	id_provider_client_secret: clientSecret	# Obtained through Google Cloud Platform
   
 	# Theme
 	keycloak_theme_name: DIINF	# Name of the folder on the repository
