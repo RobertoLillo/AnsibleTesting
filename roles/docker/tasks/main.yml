@@ -1,6 +1,6 @@
 ---
 - name: "Gather packages facts"
-  ansible.builtin.package_facts:
+  package_facts:
     manager: auto
   tags:
     - docker

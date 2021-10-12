@@ -20,14 +20,35 @@ En el archivo **main.yml** en la carpeta **defaults** se encuentran dos sets de 
  - **enable_federation: true**
  - **enable_identity_provider: true**
 
-**Otras variables**
+**Global**
+ - **samba_server_ip: 10.0.2.4**
+ - **keycloak_server_ip: 10.0.2.5**
+ - **samba_server_fqdn: samba.diinf.lan**
+ - **keycloak_server_fqdn: keycloak.diinf.tk**
+ - **files_path: /opt/sistema-centralizado**
 
- - **keycloak_base_url: "https://keycloak.diinf.tk"**
- - **keycloak_admin_user: "admin" keycloak_admin_pass: "Diinf1\*"**
- - **keycloak_realm_data_file: "master_realm.json" realm_name: "DIINF"**
- - **realm_data_file: "diinf_realm.jso federation_name: "Samba"**
- - **federation_data_file: "samba_federation.json"**
- - **id_provider_name: "google" id_provider_data_file: "google_id_provider.json"**
+**Samba Service**
+ - **samba_domain_name: DIINF**
+ - **samba_domain_suffix: LAN**
+ - **samba_domain_password: Diinf1\***
+ - **samba_dns_forwarder: 8.8.8.8**
+ - **samba_users_DN: CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}**
+ - **samba_bind_DN: CN=Administrator,CN=Users,DC={{ samba_domain_name }},DC={{ samba_domain_suffix }}**
+
+**Keycloak Service**
+ - **keycloak_container_name: keycloak-app**
+ - **keycloak_admin_user: admin**
+ - **keycloak_admin_password: Diinf1\***
+ - **keycloak_base_url: "https://{{ keycloak_server_fqdn }}"**
+ - **keycloak_realm_name: DIINF**
+ - **federation_id: Samba**
+ - **federation_name: Samba-AD**
+ - **federation_edit_mode: WRITABLE**
+ - **id_provider_name: google**
+ - **id_provider_client_id: clientId**
+ - **id_provider_client_secret: clientSecret**
+ - **keycloak_theme_name: DIINF**
+ - **keycloak_theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak**
 
 Es posible modificar esta versión en el archivo **vars.yml** que se encuentra en la raíz del repositorio.
 

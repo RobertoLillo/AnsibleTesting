@@ -61,17 +61,17 @@ keycloak_base_url: "https://{{ keycloak_server_fqdn }}"
 keycloak_realm_name: DIINF
 
 # Federation
-federation_id: Samba				# ID
-federation_name: Samba-AD			# Display name
-federation_edit_mode: WRITABLE		# Options: READ_ONLY, WRITABLE & UNSYNCED
+federation_id: Samba            # ID
+federation_name: Samba-AD       # Display name
+federation_edit_mode: WRITABLE  # Options: READ_ONLY, WRITABLE & UNSYNCED
 
 # Identity Provider
-id_provider_name: google					# Lowercase
-id_provider_client_id: clientId				# Obtained through Google Cloud Platform
-id_provider_client_secret: clientSecret		# Obtained through Google Cloud Platform
+id_provider_name: google                # Lowercase
+id_provider_client_id: clientId	        # Obtained through Google Cloud Platform
+id_provider_client_secret: clientSecret # Obtained through Google Cloud Platform
 
 # Theme
-keycloak_theme_name: DIINF		# Name of the folder on the repository
+keycloak_theme_name: DIINF      # Name of the folder on the repository
 keycloak_theme_repository: https://github.com/RobertoLillo/Tema-DIINF-Keycloak
 
 
