@@ -1,4 +1,3 @@
-
 # Prototipo de sistema multiprotocolo moderno para la administración, autenticación y autorización de clientes en el Departamento de Ingeniería Informática.
 
 Este repositorio contiene el proyecto de titulación para el semestre 1-2021 de la Universidad de Santiago de Chile, este recibe el nombre de ***Prototipo de sistema multiprotocolo moderno para la administración, autenticación y autorización de clientes en el Departamento de Ingeniería Informática*** y permite establecer un **sistema centralizado** al que se pueden conectar clientes de sistemas operativos Windows o Linux y aplicaciones Web o móviles, con el fin de consultar por autenticación y autorización de usuarios.
@@ -72,22 +71,20 @@ El despliegue del servicio se puede configurar mediante distintos archivos que s
 
 ### > Hosts
 
-En el archivo **hosts.yml** se encuentran las direcciones de las máquinas en las que se ejecuta el *playbook*. Las máquinas están divididas en los grupos **`directoryServer`** y **`authServer`**, en cada uno de estos es necesario ingresar el **FQDN** del servidor como también su **dirección IP**.
+En el archivo **hosts.yml** se encuentran las direcciones de las máquinas en las que se ejecuta el *playbook*. Las máquinas están divididas en los grupos **`directoryServer`** y **`authServer`**, en cada uno de estos es necesario ingresar el nombre con el que se puede ubicar la máquina ya sea un **alias**, una **IP** o un **FQDN**.
 
 El archivo de hosts por defecto es el siguiente:
 
     all:
       children:
       
-        directoryServer:  # Group
+        directoryService:	# Group
           hosts:
-            samba.diinf.lan:          # FQDN
-              ansible_host: 10.0.2.4  # Server IP
+            samba.diinf.lan:
               
-        authServer:       # Group
+        authService:		# Group
           hosts:
-            keycloak.diinf.tk:        # FQDN
-              ansible_host: 10.0.2.5  # Server IP
+            keycloak.diinf.tk:
 
 ### > Vars
 
@@ -100,7 +97,7 @@ En la sección ***Toggles*** se encuentran las variables que determinan si las t
     enable_identity_provider: true	# Turns ON or OFF the identity provider configuration on Keycloak
 
 \
-La siguiente sección corresponde a las variables que se utilizan de manera **Global** en el *playbook*, aquí es necesario ingresar los mismos valores previamente guardados en el archivo **hosts.yml**. También es posible determinar el directorio que será utilizado para guardar archivos de instalación en cada máquina.
+La siguiente sección corresponde a las variables que se utilizan de manera **Global** en el *playbook*, aquí es necesario ingresar las **IP** de las máquinas como también los **FQDN** que serán asignados. También es posible determinar el directorio que será utilizado para guardar archivos de instalación en cada máquina.
 
 	# ----- Global -----
 	# Server IP
