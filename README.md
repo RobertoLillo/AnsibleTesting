@@ -71,20 +71,20 @@ El despliegue del servicio se puede configurar mediante distintos archivos que s
 
 ### > Hosts
 
-En el archivo **hosts.yml** se encuentran las direcciones de las máquinas en las que se ejecuta el *playbook*. Las máquinas están divididas en los grupos **`directoryServer`** y **`authServer`**, en cada uno de estos es necesario ingresar el nombre con el que se puede ubicar la máquina ya sea un **alias**, una **IP** o un **FQDN**.
+En el archivo **hosts.yml** se encuentran las direcciones de las máquinas en las que se ejecuta el *playbook*. Las máquinas están divididas en los grupos **`directoryServer`** y **`authServer`**, en cada uno de estos es necesario ingresar el nombre con el que se puede ubicar la máquina ya sea un **nombre**, una **IP** o un **FQDN**.
 
 El archivo de hosts por defecto es el siguiente:
 
     all:
       children:
       
-        directoryService:	# Group
+        directoryService:     # Group
           hosts:
-            samba.diinf.lan:
+            samba.diinf.lan:  # Name, IP or FQDN
               
-        authService:		# Group
+        authService:            # Group
           hosts:
-            keycloak.diinf.tk:
+            keycloak.diinf.tk:  # Name, IP or FQDN
 
 ### > Vars
 
