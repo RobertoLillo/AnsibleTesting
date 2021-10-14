@@ -1,3 +1,4 @@
+
 # Prototipo de sistema multiprotocolo moderno para la administración, autenticación y autorización de clientes en el Departamento de Ingeniería Informática.
 
 Este repositorio contiene el proyecto de titulación para el semestre 1-2021 de la Universidad de Santiago de Chile, este recibe el nombre de ***Prototipo de sistema multiprotocolo moderno para la administración, autenticación y autorización de clientes en el Departamento de Ingeniería Informática*** y permite establecer un **sistema centralizado** al que se pueden conectar clientes de sistemas operativos Windows o Linux y aplicaciones Web o móviles, con el fin de consultar por autenticación y autorización de usuarios.
@@ -15,6 +16,55 @@ Para la ejecución de este *playbook* se necesita lo siguiente:
  - **Conexión SSH a las 2 máquinas a configurar**
  - **Cuenta de Google Cloud Platform** (preferiblemente cuenta USACH)
  - **Conexión a internet en las 3 máquinas**
+
+### > Requisitos del sistema
+
+En relación a las especificaciones de las máquinas, se utilizaron para prueba dos creadas virtualmente en [VirtualBox](https://www.virtualbox.org/) con las siguientes características:
+
+- 1 núcleo
+- 1GB de RAM
+- 10GB de SSD
+
+Para un ambiente de producción es recomendable aumentar las especificaciones de las máquinas a los siguientes requisitos mínimos:
+
+ 1. **Máquina de Samba AD** (*valores para un dominio de menos de 1000 usuarios*)
+	 - 2 núcleos (por sobre 1000 usuarios aumentar a 4 núcleos)
+	 - 2GB de RAM (por cada 1000 usuarios aumentar en 4GB de RAM)
+	 - 10GB de SSD (aumentar en base a las políticas de información guardada, cantidad de usuarios y máquinas)
+
+ 2. **Máquina de Keycloak**
+	 - 1 núcleo
+	 - 1GB de RAM
+	 - 15GB de SSD (aumentar en base a la necesidad de la base de datos PostgreSQL)
+
+### > Red y puertos
+
+En un sistema de pruebas local (como el implementado con VirtualBox) no es necesario realizar configuraciones de red o abrir puertos, por otro lado, si el despliegue se realizará en la nube  u otro tipo de ambiente es posible que sea necesario realizar este tipo de configuración. 
+
+Los puertos utilizados por cada máquina y que requieren ser abiertos son los siguientes:
+
+ 1. **Máquina de Samba AD** (*no pueden ser modificados*)
+ 
+| Servicio | Puerto |
+|:---:|:---:|
+| domain | 53 |
+| kerberos | 88 |
+| msrpc | 135 |
+| netbios-ssn | 139 |
+| ldap | 389 |
+| microsoft-ds | 445 |
+| kpasswd5 | 464 |
+| ldapssl | 636 |
+| kdm | 1024 |
+| globalcatLDAP | 3268 |
+| globalcatLDAPssl | 3269 |
+
+ 2. **Máquina de Keycloak** (*pueden ser modificados, explicado en la siguiente sección*)
+
+| Servicio | Puerto |
+|:---:|:---:|
+| https| 443|
+| postgresql| 5432|
 
 ## Configuración
 
@@ -105,7 +155,7 @@ La sección de ***Keycloak Service*** incluye una gran cantidad de variables al 
 	# Keycloak configuration
 	keycloak_admin_user: admin
 	keycloak_admin_password: Diinf1*
-	keycloak_base_url: "https://{{  keycloak_server_fqdn  }}"
+	keycloak_base_url: "https://{{ keycloak_server_fqdn }}"
 
 	# New Realm
 	keycloak_realm_name: DIINF

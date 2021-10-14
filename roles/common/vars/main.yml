@@ -1,2 +1,6 @@
 ---
 # vars file for common
+
+# Used to update the hosts file on every machine
+samba_host: "{{ samba_server_ip }} {{ samba_server_fqdn }}"
+keycloak_host: "{{ keycloak_server_ip }} {{ keycloak_server_fqdn }}"

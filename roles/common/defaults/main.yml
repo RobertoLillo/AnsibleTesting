@@ -1,5 +1,14 @@
 ---
 # defaults file for common
 
+# ----- Global -----
+# Server IP
+samba_server_ip: 10.0.2.4
+keycloak_server_ip: 10.0.2.5
+
+# Server FQDN
+samba_server_fqdn: samba.diinf.lan
+keycloak_server_fqdn: keycloak.diinf.tk
+
 # Files
 files_path: /opt/sistema-centralizado
