@@ -38,11 +38,11 @@ Para un ambiente de producción es recomendable aumentar las especificaciones de
 
 ### > Red y puertos
 
-En un sistema de pruebas local (como el implementado con VirtualBox) no es necesario realizar configuraciones de red o abrir puertos, por otro lado, si el despliegue se realizará en la nube  u otro tipo de ambiente es posible que sea necesario realizar este tipo de configuración. 
+En un sistema de pruebas local (como el implementado con VirtualBox) no es necesario realizar configuraciones de red o abrir puertos, por otro lado, si el despliegue se realizará en la nube u otro tipo de ambiente es posible que sea necesario realizar este tipo de configuración. 
 
-Los puertos utilizados por cada máquina y que requieren ser abiertos son los siguientes:
+Los puertos utilizados por cada máquina son los siguientes:
 
- 1. **Máquina de Samba AD** (*no pueden ser modificados*)
+ 1. **Máquina de Samba AD**
  
 | Servicio | Puerto |
 |:---:|:---:|
@@ -58,12 +58,14 @@ Los puertos utilizados por cada máquina y que requieren ser abiertos son los si
 | globalcatLDAP | 3268 |
 | globalcatLDAPssl | 3269 |
 
- 2. **Máquina de Keycloak** (*pueden ser modificados, explicado en la siguiente sección*)
+ 2. **Máquina de Keycloak**
 
 | Servicio | Puerto |
 |:---:|:---:|
 | https| 443|
 | postgresql| 5432|
+
+*Abrir el puerto de postgresql es opcional, tanto lo anterior como el número del puerto a exponer es modificable mediante el archivo de variables*.
 
 ## Configuración
 
@@ -90,11 +92,12 @@ El archivo de hosts por defecto es el siguiente:
 
 En **vars.yml** se pueden encontrar multiples variables que afectan la ejecución del *playbook* y modifican valores de los servicios desplegados. Los valores que se encuentran por defecto en este archivo están también repartidos en el archivo **main.yml** dentro de la carpeta **Defaults** de cada rol.
 
-En la sección ***Toggles*** se encuentran las variables que determinan si las tareas relacionadas a la federación de usuarios o proveedores de identidad serán ejecutadas, esto implica si estas configuraciones serán o no aplicadas al servidor de Keycloak. Esto permite desplegar el servidor de Keycloak limpio de configuraciones o sólo con la configuración que se desea probar, deshabilitar la federación permite desplegar Keycloak sin la necesidad de tener previamente un servidor de Samba AD.
+En la sección ***Toggles*** se encuentran las variables que determinan si las tareas relacionadas a la federación de usuarios o proveedores de identidad serán ejecutadas, permitiendo así desplegar el servidor de Keycloak limpio de configuraciones o sólo con la configuración que se desea probar, deshabilitar la federación permite desplegar Keycloak sin la necesidad de tener previamente un servidor de Samba AD. También se encuentra un *toggle* para exponer el puerto de la base de datos, en el caso de habilitarlo da la posibilidad de examinar los valores guardados en postgres mediante algún gestór como [pgAdmin](https://www.pgadmin.org/).
 
     # ----- Toggles -----
     enable_federation: true	        # Turns ON or OFF the federation configuration on Keycloak
     enable_identity_provider: true	# Turns ON or OFF the identity provider configuration on Keycloak
+	expose_postgres_port: true      # Turns ON or OFF postgres container port mapping
 
 \
 La siguiente sección corresponde a las variables que se utilizan de manera **Global** en el *playbook*, aquí es necesario ingresar las **IP** de las máquinas como también los **FQDN** que serán asignados. También es posible determinar el directorio que será utilizado para guardar archivos de instalación en cada máquina.

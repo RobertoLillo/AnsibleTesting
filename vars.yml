@@ -2,6 +2,7 @@
 # ----- Toggles -----
 enable_federation: true         # Turns ON or OFF the federation configuration on Keycloak
 enable_identity_provider: true  # Turns ON or OFF the identity provider configuration on Keycloak
+expose_postgres_port: true      # Turns ON or OFF postgres container port mapping
 
 
 

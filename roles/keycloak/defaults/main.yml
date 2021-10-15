@@ -1,6 +1,11 @@
 ---
 # defaults file for keycloak
 
+# ----- Toggles -----
+expose_postgres_port: false     # Turns ON or OFF postgres container port mapping
+
+
+
 # ----- Global -----
 # Server IP
 samba_server_ip: 10.0.2.4

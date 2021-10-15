@@ -2,7 +2,7 @@
 # defaults file for keycloakConfig
 
 # ----- Toggles -----
-enable_federation: true             # Turns ON or OFF the federation configuration on Keycloak
+enable_federation: false            # Turns ON or OFF the federation configuration on Keycloak
 enable_identity_provider: false     # Turns ON or OFF the identity provider configuration on Keycloak
 
 

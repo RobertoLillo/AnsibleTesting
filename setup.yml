@@ -12,7 +12,7 @@
   vars_files:
     - vars.yml
 
-- hosts: directoryServer
+- hosts: directoryService
   become: true
   tags:
     - samba_setup
@@ -21,7 +21,7 @@
   vars_files:
     - vars.yml
 
-- hosts: authServer
+- hosts: authService
   become: true
   tags:
     - keycloak_setup
