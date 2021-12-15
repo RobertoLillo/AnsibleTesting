@@ -80,19 +80,19 @@ El archivo de hosts por defecto es el siguiente:
     all:
       children:
       
-        directoryService:     # Group
+        directoryService: # Group
           hosts:
-            samba.diinf.lan:  # Name, IP or FQDN
+            samba:        # Name, IP or FQDN
               
-        authService:            # Group
+        authService:  # Group
           hosts:
-            keycloak.diinf.tk:  # Name, IP or FQDN
+            keycloak: # Name, IP or FQDN
 
 ### > Vars
 
 En **vars.yml** se pueden encontrar multiples variables que afectan la ejecución del *playbook* y modifican valores de los servicios desplegados. Los valores que se encuentran por defecto en este archivo están también repartidos en el archivo **main.yml** dentro de la carpeta **Defaults** de cada rol.
 
-En la sección ***Toggles*** se encuentran las variables que determinan si las tareas relacionadas a la federación de usuarios o proveedores de identidad serán ejecutadas, permitiendo así desplegar el servidor de Keycloak limpio de configuraciones o sólo con la configuración que se desea probar, deshabilitar la federación permite desplegar Keycloak sin la necesidad de tener previamente un servidor de Samba AD. También se encuentra un *toggle* para exponer el puerto de la base de datos, en el caso de habilitarlo da la posibilidad de examinar los valores guardados en postgres mediante algún gestor como [pgAdmin](https://www.pgadmin.org/).
+En la sección ***Toggles*** se encuentran las variables que determinan si las tareas relacionadas a la federación de usuarios o proveedores de identidad serán ejecutadas, permitiendo así desplegar el servidor de Keycloak limpio de configuraciones o sólo con la configuración que se desea probar, deshabilitar la federación permite desplegar Keycloak sin la necesidad de tener previamente un servidor de Samba AD. También se encuentra un *toggle* para exponer el puerto de la base de datos, en el caso de habilitarlo da la posibilidad de examinar los valores guardados en postgres mediante algún gestór como [pgAdmin](https://www.pgadmin.org/).
 
     # ----- Toggles -----
     enable_federation: true	        # Turns ON or OFF the federation configuration on Keycloak
